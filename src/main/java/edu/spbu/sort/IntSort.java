@@ -1,4 +1,4 @@
-package edu.spbu.cs;
+package edu.spbu.sort;
 
 import java.util.Arrays;
 import java.util.Collections;

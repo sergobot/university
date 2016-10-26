@@ -1,4 +1,4 @@
-package edu.spbu.cs;
+package edu.spbu;
 
 import java.io.FileWriter;
 import java.io.IOException;
