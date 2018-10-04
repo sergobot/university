@@ -1,3 +1,5 @@
+/* Copyright 2018, Sergey Popov (me@sergobot.me) */
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -15,6 +17,6 @@ int main()
     seconds /= 60;
     int min = seconds % 60;
     printf("The time is %02d:%02d\n", min, sec);
-    
+
     return 0;
 }

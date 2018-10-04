@@ -1,3 +1,5 @@
+/* Copyright 2018, Sergey Popov (me@sergobot.me) */
+
 #include <stdio.h>
 #include <stdlib.h>
 
