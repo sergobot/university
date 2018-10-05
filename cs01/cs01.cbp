@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="3.2">
-				<Option output="../build/3.2" prefix_auto="1" extension_auto="1" />
+				<Option output="../build/3_2" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../build/" />
 				<Option object_output="../build/obj/" />
 				<Option type="1" />
@@ -17,7 +17,7 @@
 				</Compiler>
 			</Target>
 			<Target title="3.4">
-				<Option output="../build/3.4" prefix_auto="1" extension_auto="1" />
+				<Option output="../build/3_4" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../build/" />
 				<Option object_output="../build/obj/" />
 				<Option type="1" />
@@ -30,24 +30,24 @@
 				</Linker>
 			</Target>
 			<Target title="5.3">
-				<Option output="5.3" prefix_auto="1" extension_auto="1" />
+				<Option output="../build/5_3" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../build/" />
 				<Option object_output="../build/obj/" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="gcc" />
 			</Target>
 			<Target title="5.5">
-				<Option output="5.5" prefix_auto="1" extension_auto="1" />
+				<Option output="../build/5_5" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../build/" />
 				<Option object_output="../build/obj/" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="gcc" />
 			</Target>
 			<Target title="5.9">
-				<Option output="5.9" prefix_auto="1" extension_auto="1" />
+				<Option output="../build/5_9" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../build/" />
 				<Option object_output="../build/obj/" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="gcc" />
 			</Target>
 		</Build>
