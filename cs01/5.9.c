@@ -27,6 +27,7 @@ int main()
         printf("Root of the linear equation is %.3lf\n", x);
         return 0;
     }
+    // Quadratic equation
     else
     {
         double d = b * b - 4 * a * c;
