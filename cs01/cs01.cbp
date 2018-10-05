@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="cs01" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="3.2">
+				<Option output="../build/3.2" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../build/" />
+				<Option object_output="../build/obj/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="3.4">
+				<Option output="../build/3.4" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../build/" />
+				<Option object_output="../build/obj/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="5.3">
+				<Option output="5.3" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../build/" />
+				<Option object_output="../build/obj/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+			</Target>
+			<Target title="5.5">
+				<Option output="5.5" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../build/" />
+				<Option object_output="../build/obj/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+			</Target>
+			<Target title="5.9">
+				<Option output="5.9" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../build/" />
+				<Option object_output="../build/obj/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="3.2.c">
+			<Option compilerVar="CC" />
+			<Option target="3.2" />
+		</Unit>
+		<Unit filename="3.4.c">
+			<Option compilerVar="CC" />
+			<Option target="3.4" />
+		</Unit>
+		<Unit filename="5.3.c">
+			<Option compilerVar="CC" />
+			<Option target="5.3" />
+		</Unit>
+		<Unit filename="5.5.c">
+			<Option compilerVar="CC" />
+			<Option target="5.5" />
+		</Unit>
+		<Unit filename="5.9.c">
+			<Option compilerVar="CC" />
+			<Option target="5.9" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

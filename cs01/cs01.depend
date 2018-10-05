@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1538743964 source:w:\university\cs01\3.2.c
+	<stdio.h>
+	<stdlib.h>
+
+1538746635 source:w:\university\cs01\3.4.c
+	<stdio.h>
+	<stdlib.h>
+
+1538747004 source:w:\university\cs01\5.3.c
+	<stdio.h>
+	<locale.h>
+
+1538742480 source:w:\university\cs01\5.5.c
+	<stdio.h>
+
+1538743305 source:w:\university\cs01\5.9.c
+	<stdio.h>
+	<math.h>
+
