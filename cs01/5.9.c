@@ -48,7 +48,7 @@ int main()
             d = sqrt(-d);
             double m = (double)(-b) / a / 2;
             double l = d / a / 2;
-            printf("Complex roots of the quadratic equation are %.3lf + %.3lf*i and %.3lf - %.3lf*i\n",
+            printf("Complex roots of the quadratic equation are %.3lf + %.3lf * i and %.3lf - %.3lf * i\n",
             m, l, m, l);
         }
     }

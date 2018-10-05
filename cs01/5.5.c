@@ -66,10 +66,9 @@ int main()
     y = (double)b / l;
     z = (double)c / m;
 
-    if (x == y && y == z)
-        printf("The triangles are similar.\n");
-    else
-        printf("The triangles are not similar.\n");
+    printf(x == y && y == z ? "The triangles are similar.\n"
+                            : "The triangles are not similar.\n"
+          );
 
     return 0;
 }
