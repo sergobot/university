@@ -1,8 +1,12 @@
 cmake_minimum_required(VERSION 3.0)
 project(cs01)
+
 add_executable(3.2 3.2.c)
 add_executable(3.4 3.4.c)
 add_executable(5.3 5.3.c)
 add_executable(5.5 5.5.c)
 add_executable(5.9 5.9.c)
+add_executable(7.1 7.1.c)
+add_executable(7.5 7.5.c)
+
 target_link_libraries(5.9 m)
