@@ -12,7 +12,7 @@ int main()
         return 1;
     }
 
-    printf("Now please enter step (h):\n");
+    printf("Now enter the step (h):\n");
     if (scanf("%lf", &h) != 1)
     {
         printf("Invalid input. Exiting.\n");
