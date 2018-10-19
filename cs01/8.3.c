@@ -17,10 +17,10 @@ void print_frame(int m, int n, int d)
         for (int j = 0; j < d; ++j)
             printf("*");
 
-        for (int j = 0; j < m - 2 * d; ++j)
+        for (int j = d; j < m - d; ++j)
             printf(" ");
 
-        for (int j = 0; j < d; ++j)
+        for (int j = m - d; j < m; ++j)
             printf("*");
 
         printf("\n");
