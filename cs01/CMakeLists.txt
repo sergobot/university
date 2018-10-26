@@ -12,5 +12,7 @@ add_executable(8.1 8.1.c)
 add_executable(8.2 8.2.c)
 add_executable(8.3 8.3.c)
 add_executable(8.5 8.5.c)
+add_executable(9.4 9.4.c)
 
 target_link_libraries(5.9 m)
+target_link_libraries(9.4 m)

@@ -31,10 +31,8 @@ int main()
         return 1;
     }
 
-    double root = my_sqrt(a, accuracy);
-
-    printf("Square root of %lf, computed with accuracy %lf is ", a, accuracy);
-    root >= 0 ? printf("%lf\n", root) : printf("NaN\n");
+    printf("Square root of %lf, computed with accuracy %lf is %lf\n",
+           a, accuracy, my_sqrt(a, accuracy));
 
     return 0;
 }
@@ -43,17 +41,11 @@ double my_sqrt(double a, double accuracy)
 {
     double x = a, x_prev;
 
-    if (a < 0)
-    {
-        printf("Number must be above zero or equal to it.\n");
-        return -1;
-    }
+    if (a < 0 || accuracy <= 0)
+        return 0.0/0.0;
 
-    if (accuracy <= 0)
-    {
-        printf("Accuracy must be above zero.\n");
-        return -1;
-    }
+    if (a == 1.0/0.0)
+        return a;
 
     do
     {
