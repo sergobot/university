@@ -3,6 +3,9 @@
 # Build dir
 build
 
+# Useless Code::Blocks stuff
+*.layout
+
 # Prerequisites
 *.d
 
