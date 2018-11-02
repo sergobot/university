@@ -86,14 +86,14 @@ FunctionType analyze_function(double a, double b, double c,
         isinf(a) || isinf(b) || isinf(c))
             return FACTOR_IS_INF_OR_NAN;
 
-    if (a == 0 && b == 0 && c == 0)
-        return ANY_NUMBER_IS_ROOT;
-
-    if (a == 0 && b == 0)
-        return NO_ROOTS;
-
     if (a == 0)
     {
+        if (b == 0)
+            if (c == 0)
+                return ANY_NUMBER_IS_ROOT;
+            else
+                return NO_ROOTS;
+
         if (x1 != NULL && x2 != NULL)
             *x1 = *x2 = -c / b;
         return LINEAR;
