@@ -43,7 +43,7 @@ int main()
         break;
     case QUADRATIC_TWO_COMPLEX_ROOTS:
         printf("The function is quadratic and "
-               "has two complex roots.\n");
+               "has two complex roots: %lf + %lf*i and %lf - %lf*i.\n", x1, x2, x1, x2);
         break;
     case LINEAR:
         printf("The function is linear and "
@@ -69,6 +69,16 @@ int main()
     return 0;
 }
 
+/* analyze_function analyzes a quadratic or linear function
+ * with given factors a, b and c.
+ *
+ * If the function has one or more real roots, it returns them
+ * through x1 and x2. If the roots are complex, real part is put
+ * into x1 and the complex part into x2.
+ * If either x1 or x2 is NULL, no value is
+ * written into them.
+ */
+
 FunctionType analyze_function(double a, double b, double c,
                               double *x1, double *x2)
 {
@@ -84,7 +94,8 @@ FunctionType analyze_function(double a, double b, double c,
 
     if (a == 0)
     {
-        *x1 = *x2 = -c / b;
+        if (x1 != NULL && x2 != NULL)
+            *x1 = *x2 = -c / b;
         return LINEAR;
     }
 
@@ -92,15 +103,26 @@ FunctionType analyze_function(double a, double b, double c,
     double d = b * b - 4 * a * c;
 
     if (d < 0)
+    {
+        if (x1 != NULL && x2 != NULL)
+        {
+            *x1 = -b / a / 2;
+            *x2 = sqrt(-d) / a / 2;
+        }
         return QUADRATIC_TWO_COMPLEX_ROOTS;
+    }
 
     if (d == 0)
     {
-        *x1 = *x2 = -b / 2 / a;
+        if (x1 != NULL && x2 != NULL)
+            *x1 = *x2 = -b / 2 / a;
         return QUADRATIC_ONE_REAL_ROOT;
     }
 
-    *x1 = (-b + sqrt(d)) / 2 / a;
-    *x2 = (-b - sqrt(d)) / 2 / a;
+    if (x1 != NULL && x2 != NULL)
+    {
+        *x1 = (-b + sqrt(d)) / 2 / a;
+        *x2 = (-b - sqrt(d)) / 2 / a;
+    }
     return QUADRATIC_TWO_REAL_ROOTS;
 }
