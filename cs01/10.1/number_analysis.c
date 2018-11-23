@@ -44,6 +44,10 @@ int is_palindrome(int n)
 /** Find out whether n is a prime number or not **/
 int is_prime(int n)
 {
+    /* 0 and 1 are not prime numbers */
+    if (n == 1 || n == 0)
+        return 0;
+
     int k = (int) sqrt(n);
     for (int i = 2; i < k; ++i)
         if (n % i == 0)
