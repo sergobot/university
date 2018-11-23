@@ -46,3 +46,19 @@
 
 1542375304 w:\university\cs01\10.1\number_analysis.h
 
+1542975964 source:w:\university\cs01\10.1\number_analysis.c
+	<math.h>
+	<stdio.h>
+	"number_analysis.h"
+
+1542976777 source:w:\university\cs01\10.2.c
+	<stdio.h>
+	"10.2/function_analysis.h"
+
+1542976630 w:\university\cs01\10.2\function_analysis.h
+
+1542976970 source:w:\university\cs01\10.2\function_analysis.c
+	<math.h>
+	<stddef.h>
+	"function_analysis.h"
+

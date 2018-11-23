@@ -113,6 +113,13 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 			</Target>
+			<Target title="10.2">
+				<Option output="../build/10_2" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../build/" />
+				<Option object_output="../build/obj/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
@@ -126,6 +133,17 @@
 			<Option target="10.1" />
 		</Unit>
 		<Unit filename="10.1/number_analysis.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="10.2.c">
+			<Option compilerVar="CC" />
+			<Option target="10.2" />
+		</Unit>
+		<Unit filename="10.2/function_analysis.c">
+			<Option compilerVar="CC" />
+			<Option target="10.2" />
+		</Unit>
+		<Unit filename="10.2/function_analysis.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="3.2.c">
