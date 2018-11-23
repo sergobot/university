@@ -3,7 +3,7 @@
 #include <math.h>
 #include "number_analysis.h"
 
-/* Sum digits of n in base b */
+/** Sum digits of n in base b **/
 int digit_sum_in_base(int n, int b)
 {
     int s = 0;
@@ -15,7 +15,7 @@ int digit_sum_in_base(int n, int b)
     return s;
 }
 
-/* Count digits of n in base n */
+/** Count digits of n in base n **/
 int count_digits_in_base(int n, int b)
 {
     int c = 0;
@@ -27,7 +27,7 @@ int count_digits_in_base(int n, int b)
     return c;
 }
 
-/* Find out whether n is a palindrome or not */
+/** Find out whether n is a palindrome or not **/
 int is_palindrome(int n)
 {
     int k = 0, m = n;
@@ -38,10 +38,10 @@ int is_palindrome(int n)
         m /= 10;
     }
 
-    return m == n;
+    return k == n;
 }
 
-/* Find out whether n is a prime number or not */
+/** Find out whether n is a prime number or not **/
 int is_prime(int n)
 {
     int k = (int) sqrt(n);
