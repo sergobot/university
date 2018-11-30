@@ -1,28 +1,15 @@
 /** Copyright 2018, Sergey Popov (me@sergobot.me) **/
 
 #include <stdio.h>
-
-/** Compute digital root of a number in given base **/
-int digital_root_recursive(int a, int base);
-
-/** Compute Greatest Common Divisor of two numbers iteratively **/
-int gcd_iterative(int a, int b);
-
-/** Compute Greatest Common Divisor of two numbers recursively **/
-int gcd_recursive(int a, int b);
-
-/** Compute Least Common Multiple of two numbers iteratively **/
-int lcm_iterative(int a, int b);
-
-/** Compute Least Common Moltiple of two numbers recursively **/
-int lcm_recursive(int a, int b);
+#include "11.1/digital_root.h"
+#include "11.1/gcd_lcm.h"
 
 int main()
 {
     printf("Welcome to 11.1! Please choose what to compute (1, 2 or 3):\n"
            "1) Digital root in given base\n"
            "2) Greatest Common Divisor\n"
-           "3) Lease Common Multiple\n");
+           "3) Least Common Multiple\n");
 
     int operation, a, b;
     if (scanf("%d", &operation) != 1 || operation < 1 || operation > 3)
@@ -51,6 +38,7 @@ int main()
                a, b, dr,
                (b != 10) && (b < dr) ? "Note, answer is shown in base 10.\n" : "");
         break;
+    /** Greatest Common Divisor **/
     case 2:
         printf("Enter two numbers:\n");
         if (scanf("%d%d", &a, &b) != 2 || a < 0 || b < 0)
@@ -61,6 +49,7 @@ int main()
 
         printf("Greatest Common Divisor of %d and %d is %d.\n", a, b, gcd_iterative(a, b));
         break;
+    /** Least Common Multiple **/
     case 3:
         printf("Enter two numbers:\n");
         if (scanf("%d%d", &a, &b) != 2 || a < 0 || b < 0)
@@ -73,43 +62,4 @@ int main()
         break;
     }
     return 0;
-}
-
-int digital_root_recursive(int a, int base)
-{
-    int s = 0;
-    while (a > 0)
-    {
-        s += a % base;
-        a /= base;
-    }
-
-    return s < base ? s : digital_root_recursive(s, base);
-}
-
-int gcd_iterative(int a, int b)
-{
-    int t;
-    while (b > 0)
-    {
-        t = b;
-        b = a % b;
-        a = t;
-    }
-    return a;
-}
-
-int gcd_recursive(int a, int b)
-{
-    return a % b == 0 ? b : gcd_recursive(b, a % b);
-}
-
-int lcm_iterative(int a, int b)
-{
-    return a * b / gcd_iterative(a, b);
-}
-
-int lcm_recursive(int a, int b)
-{
-    return a * b / gcd_recursive(a, b);
 }
