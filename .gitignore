@@ -5,6 +5,7 @@ build
 
 # Useless Code::Blocks stuff
 *.layout
+*.depend
 
 # Prerequisites
 *.d
