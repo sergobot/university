@@ -5,7 +5,9 @@
 #ifndef FIND_EXTREME_H_INCLUDED
 #define FIND_EXTREME_H_INCLUDED
 
+#include <stdlib.h>
+
 /* Find the most differing element of an array */
-double find_extreme(double *a, int length);
+double find_extreme(const double *a, size_t length);
 
 #endif // FIND_EXTREME_H_INCLUDED

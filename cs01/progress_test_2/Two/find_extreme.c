@@ -3,7 +3,7 @@
 #include "find_extreme.h"
 
 /* Find the most differing elements of an array */
-double find_extreme(double *a, int length)
+double find_extreme(const double *a, size_t length)
 {
     // An extreme value is either maximum or minimum, so
     // find them while summing up the array to avoid running
