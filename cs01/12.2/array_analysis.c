@@ -3,14 +3,14 @@
 #include <stdlib.h>
 #include "array_analysis.h"
 
-int sign_changes(int *arr, int n)
+int sign_changes(int *arr, size_t n)
 {
-    int previous_sign = arr[0] / abs(arr[0]);
+    int previous_sign = arr[0] >= 0 ? 1 : -1;
     int changes = 0;
 
-    for (int i = 1; i < n; ++i)
+    for (size_t i = 1; i < n; ++i)
     {
-        int new_sign = arr[i] / abs(arr[i]);
+        int new_sign = arr[i] >= 0 ? 1 : -1;
         if (new_sign != previous_sign)
         {
             previous_sign = new_sign;
@@ -21,14 +21,14 @@ int sign_changes(int *arr, int n)
     return changes;
 }
 
-int max_monotonous_subarray_length(int *arr, int n)
+int max_monotonous_subarray_length(int *arr, size_t n)
 {
     int max_length = 1;
     int current_length = 1;
     int ascending = 1;
 
-    for (int i = 1; i < n; ++i)
-        if ((arr[i] > arr[i-1]) == ascending)
+    for (size_t i = 1; i < n; ++i)
+        if (arr[i] == arr[i-1] || (arr[i] > arr[i-1]) == ascending)
             ++current_length;
         else
         {
@@ -44,9 +44,9 @@ int max_monotonous_subarray_length(int *arr, int n)
     return max_length;
 }
 
-int is_sorted(int *arr, int n, int ascending)
+int is_sorted(int *arr, size_t n, int ascending)
 {
-    for (int i = 1; i < n; ++i)
+    for (size_t i = 1; i < n; ++i)
     {
         if (arr[i] != arr[i-1] && (arr[i] > arr[i-1]) != ascending)
             return 0;

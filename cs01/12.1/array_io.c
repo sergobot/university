@@ -4,9 +4,9 @@
 #include "array_io.h"
 
 /** Scans an array of n elemnents of int from stdin **/
-int scan_int(int *arr, int n)
+int scan_int(int *arr, size_t n)
 {
-    for (int i = 0; i < n; ++i)
+    for (size_t i = 0; i < n; ++i)
         if (scanf("%d", &arr[i]) != 1)
             return 0;
 
@@ -14,9 +14,9 @@ int scan_int(int *arr, int n)
 }
 
 /** Scans an array of n elemnents of double from stdin **/
-int scan_double(double *arr, int n)
+int scan_double(double *arr, size_t n)
 {
-    for (int i = 0; i < n; ++i)
+    for (size_t i = 0; i < n; ++i)
         if (scanf("%lf", &arr[i]) != 1)
             return 0;
 
@@ -24,17 +24,17 @@ int scan_double(double *arr, int n)
 }
 
 /** Prints an array of n elements of type int **/
-void print_int(int *arr, int n)
+void print_int(int *arr, size_t n)
 {
-    for (int i = 0; i < n; ++i)
+    for (size_t i = 0; i < n; ++i)
         printf("%d ", arr[i]);
     printf("\n");
 }
 
 /** Prints an array of n elements of type double **/
-void print_double(double *arr, int n)
+void print_double(double *arr, size_t n)
 {
-    for (int i = 0; i < n; ++i)
+    for (size_t i = 0; i < n; ++i)
         printf("%lf ", arr[i]);
     printf("\n");
 }

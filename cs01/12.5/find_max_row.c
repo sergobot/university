@@ -1,14 +1,16 @@
 /** Copyright 2019, Sergey Popov (me@sergobot.me) **/
 
+#include <float.h>
 #include "find_max_row.h"
 
-int find_max_row(int n, int m, int *arr[m])
+size_t find_max_row(double (*arr)[ARRAY_SIZE], size_t n, size_t m)
 {
-    int max_sum = 0, max_row = 0;
-    for (int i = 0; i < n; ++i)
+    double max_sum = -DBL_MAX;
+    size_t max_row = 0;
+    for (size_t i = 0; i < n; ++i)
     {
-        int current_sum = 0;
-        for (int j = 0; j < m; ++j)
+        double current_sum = 0;
+        for (size_t j = 0; j < m; ++j)
             current_sum += arr[i][j];
 
         if (max_sum < current_sum)

@@ -3,6 +3,10 @@
 #ifndef FIND_MAX_ROW_H
 #define FIND_MAX_ROW_H
 
-int find_max_row(int n, int m, int *arr[m]);
+#ifndef ARRAY_SIZE
+#define ARRAY_SIZE 100
+#endif // ARRAY_SiZE
+
+size_t find_max_row(double (*arr)[ARRAY_SIZE], size_t n, size_t m);
 
 #endif // FIND_MAX_ROW_H

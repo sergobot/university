@@ -1,11 +1,12 @@
 /** Copyright 2019, Sergey Popov (me@sergobot.me) **/
 
+#include <stdlib.h>
 #include "odd_even.h"
 
-int remove_odd_even(int *arr, int n, int oddity)
+int remove_odd_even(int *arr, size_t n, int oddity)
 {
-    int j = 0;
-    for (int i = 0; i < n; ++i)
+    size_t j = 0;
+    for (size_t i = 0; i < n; ++i)
     {
         if (arr[i] % 2 != oddity)
         {
