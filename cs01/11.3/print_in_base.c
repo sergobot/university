@@ -1,6 +1,7 @@
 /** Copyright 2018, Sergey Popov (me@sergobot.me) **/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "print_in_base.h"
 
 void print_in_base(int a, int base)
