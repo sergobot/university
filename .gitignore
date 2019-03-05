@@ -60,4 +60,5 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-
+# Intellij IDEA and CLion directory
+.idea
