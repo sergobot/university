@@ -19,4 +19,9 @@ double integrate_fixed_steps(integration_method method,
                              double right_border,
                              unsigned dots);
 
+double integrate_iteratively_trapezoid(mathematical_function f,
+                                       double left_border,
+                                       double right_border,
+                                       double precision);
+
 #endif // INTEGRATE_H
