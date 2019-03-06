@@ -8,6 +8,7 @@
 
 double integrate_fixed_steps(integration_method method,
                              mathematical_function f,
+                             double *p,
                              double left_border,
                              double right_border,
                              unsigned steps_count)
@@ -20,7 +21,7 @@ double integrate_fixed_steps(integration_method method,
     double right_x = left_border;
 
     double total_area = 0;
-    for (int i = 0; i < steps_count; ++i)
+    for (unsigned i = 0; i < steps_count; ++i)
     {
         left_x = right_x;
         middle_x = left_x + half_step;
@@ -29,23 +30,23 @@ double integrate_fixed_steps(integration_method method,
         switch(method)
         {
         case LEFT_RECTANGLES:
-            total_area += fabs(f(left_x));
-                break;
+            total_area += fabs(f(left_x, p));
+            break;
         case RIGHT_RECTANGLES:
-            total_area += fabs(f(right_x));
-                break;
+            total_area += fabs(f(right_x, p));
+            break;
         case MIDDLE_RECTANGLES:
-            total_area += fabs(f(middle_x));
-                break;
+            total_area += fabs(f(middle_x, p));
+            break;
         case TRAPEZOIDS:
-            total_area += (fabs(f(right_x)) + fabs(f(left_x))) / 2;
-                break;
+            total_area += (fabs(f(right_x, p)) + fabs(f(left_x, p))) / 2;
+            break;
         case PARABOLAS:
-            total_area += (fabs(f(right_x)) + 4 * fabs(f(middle_x)) + fabs(f(right_x))) / 6;
-                break;
-            default:
-                /* Internal error, exit with negative area */
-                return -1;
+            total_area += (fabs(f(right_x, p)) + 4 * fabs(f(middle_x, p)) + fabs(f(right_x, p))) / 6;
+            break;
+        default:
+            /* Internal error, exit with negative area */
+            return -1;
         }
     }
 
@@ -53,12 +54,13 @@ double integrate_fixed_steps(integration_method method,
 }
 
 double integrate_iteratively_trapezoid(mathematical_function f,
+                                       double *p,
                                        double left_border,
                                        double right_border,
                                        double precision) {
     precision = fabs(precision);
 
-    unsigned steps_count = 1;
+    unsigned steps_count = 2;
     double achieved_precision = DBL_MAX;
 
     unsigned iteration = 0;
@@ -68,11 +70,11 @@ double integrate_iteratively_trapezoid(mathematical_function f,
 
         double left_x, right_x = iteration % 2 ? left_border + step / 2 : left_border;
         current_area = 0;
-        for (int i = 0; i < steps_count; ++i) {
+        for (unsigned i = 0; i < steps_count; ++i) {
             left_x = right_x;
             right_x += step;
 
-            current_area += (fabs(f(right_x)) + fabs(f(left_x))) * step / 2;
+            current_area += (fabs(f(right_x, p)) + fabs(f(left_x, p))) * step / 2;
         }
 
         current_area = (current_area + previous_area) / 2;
