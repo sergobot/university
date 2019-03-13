@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include "array_io.h"
 
-/** Scans an array of n elemnents of int from stdin **/
+/** Scans an array of n elements of int from stdin **/
 int scan_int(int *arr, size_t n)
 {
     for (size_t i = 0; i < n; ++i)
@@ -13,7 +13,7 @@ int scan_int(int *arr, size_t n)
     return 1;
 }
 
-/** Scans an array of n elemnents of double from stdin **/
+/** Scans an array of n elements of double from stdin **/
 int scan_double(double *arr, size_t n)
 {
     for (size_t i = 0; i < n; ++i)
