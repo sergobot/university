@@ -33,6 +33,8 @@ int find_place_to_put(void *a, void *e, int length, int size, compare f)
 {
     int l = 0, r = length - 1;
 
+    // Default value in case l (left border) turns out larger than r.
+    int pos = -1;
     while (l <= r)
     {
         int m = (l + r) / 2;
@@ -43,9 +45,10 @@ int find_place_to_put(void *a, void *e, int length, int size, compare f)
             r = m - 1;
             break;
         case 0:
-            while (f(e, a + size * m) == 0)
-                ++m;
-            return m;
+            // If we encounter the desired element, shrink the search region to the right
+            pos = m;
+            l = m + 1;
+            break;
         case 1:
             l = m + 1;
             break;
@@ -54,7 +57,9 @@ int find_place_to_put(void *a, void *e, int length, int size, compare f)
         }
     }
 
-    if (f(e, a) == -1)
+    if (pos != -1)
+        return pos + 1;
+    else if (f(e, a) == -1)
         return 0;
     else if (f(e, a + (length - 1) * size) == 1)
         return length;

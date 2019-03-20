@@ -5,16 +5,17 @@
 #include "14.3/binary_operations.h"
 #include "12.1/array_io.h"
 
-int compare_ints(int *a, int *b)
+int compare_ints(void *_a, void *_b)
 {
-    if (*a < *b) return -1;
-    else if (*a == *b) return 0;
+    int a = *(int *) _a, b = *(int *) _b;
+    if (a < b) return -1;
+    else if (a == b) return 0;
     else return 1;
 }
 
 int main()
 {
-    printf("Welcome to 14.3! Please enter size of your array of ints:\n");
+    printf("Welcome to 14.3! Please enter size of your array of integers:\n");
     int n;
     if (scanf("%d", &n) != 1)
     {
