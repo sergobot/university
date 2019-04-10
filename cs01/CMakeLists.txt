@@ -23,6 +23,7 @@ add_executable(12.3 12.3.c 12.3/odd_even.c 12.1/array_io.c)
 add_executable(12.5 12.5.c 12.5/find_max_row.c 12.1/array_io.c)
 add_executable(13 13.c 13/integrate.c)
 add_executable(14.3 14.3.c 14.3/binary_operations.c 12.1/array_io.c)
+add_executable(17 17.c 17/stringUtils.c)
 
 target_link_libraries(5.9 m)
 target_link_libraries(9.4 m)
