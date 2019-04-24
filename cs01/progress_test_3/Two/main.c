@@ -17,7 +17,7 @@ int main()
     }
 
     long *a = malloc(length * sizeof(long));
-    long *end = a + length * sizeof(long);
+    long *end = a + length;
 
     long *iterator = a;
 
@@ -29,7 +29,7 @@ int main()
             printf("Invalid input :(\nExiting!\n");
             return 1;
         }
-        iterator += sizeof(long);
+        ++iterator;
     }
 
     printf("The smallest number is %ld\n", (long)(*find_smallest(a, length)));

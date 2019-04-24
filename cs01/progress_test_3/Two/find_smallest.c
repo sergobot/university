@@ -4,15 +4,15 @@
 
 const long* find_smallest(const long* start, size_t length)
 {
-    const long* smallest = start;
-    const long* end = start + length * sizeof(long);
+    const long* smallest = NULL;
+    const long* end = start + length;
 
-    while(start != end)
+    while(start < end)
     {
-        if (*start > 0 && *start < *smallest)
+        if (*start > 0 && (smallest == NULL || *start < *smallest))
             smallest = start;
 
-        start += sizeof(long);
+        ++start;
     }
 
     return smallest;
