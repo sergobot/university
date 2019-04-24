@@ -186,6 +186,13 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 			</Target>
+			<Target title="18">
+				<Option output="../build/18" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../build/" />
+				<Option object_output="../build/obj/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wextra" />
@@ -323,6 +330,17 @@
 		</Unit>
 		<Unit filename="17/stringUtils.h">
 			<Option target="17" />
+		</Unit>
+		<Unit filename="18.c">
+			<Option compilerVar="CC" />
+			<Option target="18" />
+		</Unit>
+		<Unit filename="18/splitString.c">
+			<Option compilerVar="CC" />
+			<Option target="18" />
+		</Unit>
+		<Unit filename="18/splitString.h">
+			<Option target="18" />
 		</Unit>
 		<Unit filename="3.2.c">
 			<Option compilerVar="CC" />
