@@ -18,8 +18,8 @@ int main()
     }
     // There may only be no more than ceil(LENGTH / 2) words
     char **words = malloc(LENGTH / 2 + LENGTH % 2), *buffer = malloc(LENGTH);
-    split_string(a, buffer, words, " ,.!?-\n\t");
-
+    split_string_sorted(a, buffer, words, " ,.!?-\n\t");
+    
     int i = 0;
     while(*(words + i) != NULL)
     {
