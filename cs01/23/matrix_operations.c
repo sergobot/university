@@ -3,14 +3,6 @@
 #include "matrix.h"
 #include "matrix_operations.h"
 
-matrix mul(matrix mat, double a)
-{
-    for (size_t i = 0; i < mat.height * mat.width; ++i)
-        *(mat.mat + i) *= a;
-
-    return mat;
-}
-
 matrix add(matrix a, matrix b, matrix result)
 {
     if (a.height != b.height || a.width != b.height ||
@@ -41,21 +33,25 @@ matrix dot(matrix a, matrix b, matrix result)
     return result;
 }
 
-matrix mul_row(matrix mat, size_t row, double a)
+void mul(matrix mat, double a)
+{
+    for (size_t i = 0; i < mat.height * mat.width; ++i)
+        *(mat.mat + i) *= a;
+}
+
+void mul_row(matrix mat, size_t row, double a)
 {
     if (row >= mat.height)
-        return ERRONEOUS_MATRIX;
+        return;
 
     for (size_t i = 0; i < mat.width; ++i)
         *access(mat, row, i) *= a;
-
-    return mat;
 }
 
-matrix swap_rows(matrix mat, size_t a, size_t b)
+void swap_rows(matrix mat, size_t a, size_t b)
 {
     if (a >= mat.height || b >= mat.height)
-        return ERRONEOUS_MATRIX;
+        return;
 
     for (size_t i = 0; i < mat.width; ++i)
     {
@@ -63,17 +59,28 @@ matrix swap_rows(matrix mat, size_t a, size_t b)
         *access(mat, a, i) = *access(mat, b, i);
         *access(mat, b, i) = c;
     }
-
-    return mat;
 }
 
-matrix add_rows(matrix mat, size_t a, size_t b)
+void add_rows(matrix mat, size_t a, size_t b)
 {
     if (a >= mat.height || b >= mat.height)
-        return ERRONEOUS_MATRIX;
+        return;
 
     for (size_t i = 0; i < mat.width; ++i)
         *access(mat, a, i) += *access(mat, b, i);
+}
 
-    return mat;
+matrix transpose(matrix mat)
+{
+    matrix transposed = create_matrix(mat.width, mat.height);
+    for (size_t i = 0; i < mat.height; ++i)
+        for (size_t j = 0; j < mat.width; ++j)
+            *access(transposed, j, i) = *access(mat, i, j);
+
+    return transposed;
+}
+
+matrix inverse(matrix mat)
+{
+
 }

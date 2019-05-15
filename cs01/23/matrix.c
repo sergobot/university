@@ -4,6 +4,8 @@
 
 #include "matrix.h"
 
+const matrix ERRONEOUS_MATRIX = (matrix) {NULL, 0, 0};
+
 matrix create_matrix(size_t height, size_t width)
 {
     return (matrix) {.mat = malloc(height * width), .height = height, .width = width};
@@ -17,7 +19,9 @@ void destroy_matrix(matrix* mat)
 
 matrix zero_matrix(size_t height, size_t width)
 {
-    return fill_zeroes(create_matrix(height, width));
+    matrix mat = create_matrix(height, width);
+    fill_zeroes(mat);
+    return mat;
 }
 
 matrix identity_matrix(size_t size)
@@ -38,7 +42,7 @@ matrix copy(matrix mat)
     return new_mat;
 }
 
-matrix fill_zeroes(matrix mat)
+void fill_zeroes(matrix mat)
 {
     for (size_t i = 0; i < mat.height * mat.width; ++i)
         *(mat.mat + i) = 0;

@@ -25,7 +25,7 @@ add_executable(13 13.c 13/integrate.c)
 add_executable(14.3 14.3.c 14.3/binary_operations.c 12.1/array_io.c)
 add_executable(17 17.c 17/stringUtils.c)
 add_executable(18 18.c 18/splitString.c)
-add_executable(23 23.c 23/matrix.c)
+add_executable(23 23.c 23/matrix.c 23/matrix_io.c 23/matrix_operations.c)
 
 target_link_libraries(5.9 m)
 target_link_libraries(9.4 m)
