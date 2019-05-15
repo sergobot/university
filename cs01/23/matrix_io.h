@@ -1,3 +1,5 @@
+/** Copyright 2019, Sergey Popov (me@sergobot.me) **/
+
 #ifndef MATRIX_IO_H
 #define MATRIX_IO_H
 

@@ -82,5 +82,5 @@ matrix transpose(matrix mat)
 
 matrix inverse(matrix mat)
 {
-
+    return mat;
 }
