@@ -2,23 +2,16 @@
 
 #include "23/matrix.h"
 #include "23/matrix_io.h"
-#include <stdio.h>
+#include "23/matrix_operations.h"
 
 int main()
 {
-    matrix mat = create_matrix(5, 5);
-    print_matrix(mat);
 
-    for (size_t i = 0; i < mat.height * mat.width; ++i)
-        *(mat.mat + i * sizeof(double)) = 0;
-
-    for (size_t i = 0; i < 5; ++i)
-        *(mat.mat + 5 * i * sizeof(double) + i * sizeof(double)) = 1;
-
-    printf("\n");
-    print_matrix(mat);
-
+    matrix mat = read_matrix(3, 3);
+    matrix inv = inverse(mat);
+    print_matrix(inv);
     destroy_matrix(&mat);
+    destroy_matrix(&inv);
 
     return 0;
 }

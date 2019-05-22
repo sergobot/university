@@ -82,5 +82,33 @@ matrix transpose(matrix mat)
 
 matrix inverse(matrix mat)
 {
-    return mat;
+    if (mat.height != mat.width)
+        return ERRONEOUS_MATRIX;
+
+    matrix temp = copy(mat);
+    matrix inv = identity_matrix(mat.height);
+
+    for (size_t i = 0; i < temp.width; ++i)
+        for (size_t j = 0; j < temp.height; ++j)
+            if (i != j) {
+                // TODO: It may be possible to swap rows to eliminate diagonal zeroes
+                if (*access(temp, i, i) == 0)
+                    return ERRONEOUS_MATRIX;
+
+                double factor = *access(temp, j, i) / *access(temp, i, i);
+                for (size_t k = 0; k < temp.width; ++k) {
+                    *access(temp, j, k) -= *access(temp, i, k) * factor;
+                    *access(inv, j, k) -= *access(inv, i, k) * factor;
+                }
+            }
+
+    for (size_t i = 0; i < temp.height; i++) {
+        double factor = *access(temp, i, i);
+        for (size_t j = 0; j < temp.width; j++)
+            *access(inv, i, j) = *access(inv, i, j) / factor;
+    }
+
+    destroy_matrix(&temp);
+
+    return inv;
 }
