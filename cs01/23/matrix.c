@@ -1,8 +1,6 @@
 /** Copyright 2019, Sergey Popov (me@sergobot.me) **/
 
 #include <string.h>
-#include <stdio.h>
-
 #include "matrix.h"
 
 const matrix ERRONEOUS_MATRIX = (matrix) {NULL, 0, 0};
@@ -38,8 +36,8 @@ matrix identity_matrix(size_t size)
 matrix copy(matrix mat)
 {
     matrix new_mat = create_matrix(mat.height, mat.width);
-    memcpy(new_mat.mat, mat.mat, mat.height * mat.width * sizeof(double));
-
+    for (size_t i = 0; i < mat.height * mat.width; ++i)
+        *(new_mat.mat + i * sizeof(double)) = *(mat.mat + i * sizeof(double));
     return new_mat;
 }
 
