@@ -17,9 +17,8 @@ int main()
     }
 
     const char* filename = "input.txt";
-    FILE *file = fopen(filename, "r");
 
-    printf("There are %d lines with '%c' in the end\n", (int)count_lines_with_last_symbol(file, c), c);
+    printf("There are %d lines with '%c' in the end\n", (int)count_lines_with_last_symbol(filename, c), c);
 
     return 0;
 }

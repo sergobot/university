@@ -5,6 +5,6 @@
 
 #include <stdio.h>
 
-size_t count_lines_with_last_symbol(FILE *file, char symbol);
+size_t count_lines_with_last_symbol(const char *filename, char symbol);
 
 #endif // FILEUTILS_H
