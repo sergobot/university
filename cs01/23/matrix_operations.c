@@ -1,13 +1,13 @@
 /** Copyright 2019, Sergey Popov (me@sergobot.me) **/
 
-#include "matrix.h"
 #include "matrix_operations.h"
 
-matrix add(matrix a, matrix b, matrix result)
+matrix add(matrix a, matrix b)
 {
-    if (a.height != b.height || a.width != b.height ||
-        a.height != result.height || a.width != result.width)
+    if (a.height != b.height || a.width != b.height)
         return ERRONEOUS_MATRIX;
+
+    matrix result = create_matrix(a.height, a.width);
 
     for (size_t i = 0; i < result.height; ++i)
         for (size_t j = 0; j < result.width; ++j)
@@ -16,20 +16,17 @@ matrix add(matrix a, matrix b, matrix result)
     return result;
 }
 
-matrix dot(matrix a, matrix b, matrix result)
+matrix dot(matrix a, matrix b)
 {
-    if (a.width != b.height || a.height != result.height || b.width != result.width)
+    if (a.width != b.height)
         return ERRONEOUS_MATRIX;
 
-    for (size_t i = 0; i < result.height; ++i)
-        for (size_t j = 0; j < result.width; ++j)
-        {
-            double sum = 0;
-            for (size_t k = 0; k < a.width; ++k)
-                sum += (*access(a, i, k)) * (*access(b, k, j));
-            *access(result, i, j) = sum;
-        }
+    matrix result = zero_matrix(a.height, b.width);
 
+    for (size_t j = 0; j < result.height; ++j)
+        for (size_t i = 0; i < result.width; ++i)
+            for (size_t k = 0; k < a.width; ++k)
+                *access(result, i, j) += (*access(a, i, k)) * (*access(b, k, j));
     return result;
 }
 
@@ -91,7 +88,7 @@ matrix inverse(matrix mat)
     for (size_t i = 0; i < temp.width; ++i)
         for (size_t j = 0; j < temp.height; ++j)
             if (i != j) {
-                // TODO: It may be possible to swap rows to eliminate diagonal zeroes
+                // TODO: It may be possible to swap rows to eliminate diagonal zeros
                 if (*access(temp, i, i) == 0)
                     return ERRONEOUS_MATRIX;
 
@@ -111,4 +108,19 @@ matrix inverse(matrix mat)
     destroy_matrix(&temp);
 
     return inv;
+}
+
+matrix exponent(matrix mat, size_t power)
+{
+    if (mat.width != mat.height)
+        return ERRONEOUS_MATRIX;
+
+    if (power == 1)
+        return copy(mat);
+
+    matrix prev_exp = exponent(mat, power - 1);
+    matrix result = dot(prev_exp, mat);
+    destroy_matrix(&prev_exp);
+
+    return result;
 }
