@@ -28,7 +28,7 @@ matrix identity_matrix(size_t size)
     matrix mat = zero_matrix(size, size);
 
     for (size_t i = 0; i < size; ++i)
-        *(mat.mat + size * i * sizeof(double) + i * sizeof(double)) = 1;
+        *(mat.mat + size * i + i) = 1;
 
     return mat;
 }
@@ -37,14 +37,14 @@ matrix copy(matrix mat)
 {
     matrix new_mat = create_matrix(mat.height, mat.width);
     for (size_t i = 0; i < mat.height * mat.width; ++i)
-        *(new_mat.mat + i * sizeof(double)) = *(mat.mat + i * sizeof(double));
+        *(new_mat.mat + i) = *(mat.mat + i);
     return new_mat;
 }
 
 void fill_zeroes(matrix mat)
 {
     for (size_t i = 0; i < mat.height * mat.width; ++i)
-        *(mat.mat + i * sizeof(double)) = 0;
+        *(mat.mat + i) = 0;
 }
 
 double* access(matrix mat, size_t i, size_t j)
@@ -52,5 +52,5 @@ double* access(matrix mat, size_t i, size_t j)
     if (i > mat.height || j > mat.width)
         return NULL;
 
-    return (mat.mat + i * mat.width * sizeof(double) + j * sizeof(double));
+    return (mat.mat + i * mat.width + j);
 }

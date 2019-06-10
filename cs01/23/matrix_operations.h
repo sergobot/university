@@ -17,4 +17,6 @@ matrix transpose(matrix mat);
 matrix inverse(matrix mat);
 matrix exponent(matrix mat);
 
+double frobenious_norm(matrix mat);
+
 #endif // MATRIX_OPERATIONS_H

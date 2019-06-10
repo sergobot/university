@@ -44,7 +44,7 @@ int main()
     destroy_matrix(&mat);
     destroy_matrix(&inv);
     destroy_matrix(&trans);
-    //destroy_matrix(&exp);
+    destroy_matrix(&exp);
 
     return 0;
 }

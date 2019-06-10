@@ -1,5 +1,6 @@
 /** Copyright 2019, Sergey Popov (me@sergobot.me) **/
 
+#include <math.h>
 #include "matrix_operations.h"
 
 matrix add(matrix a, matrix b)
@@ -116,23 +117,35 @@ matrix exponent(matrix mat)
         return ERRONEOUS_MATRIX;
 
     double q = 1;
-    matrix result = copy(mat);
-    matrix power = copy(mat);
+    matrix result = identity_matrix(mat.height);
+    matrix power = identity_matrix(mat.height);
 
-    for (int i = 2; i < 10; ++i)
+    for (int i = 1; i < 20; ++i)
     {
         matrix temp = dot(power, mat);
+        matrix temp2 = copy(temp);
         q /= i;
-        mul(temp, q);
-        matrix temp2 = add(result, temp);
+        mul(temp2, q);
+        matrix temp3 = add(result, temp2);
 
         destroy_matrix(&power);
         power.mat = temp.mat;
 
         destroy_matrix(&result);
-        result.mat = temp2.mat;
+        result.mat = temp3.mat;
+
+        destroy_matrix(&temp2);
     }
 
     destroy_matrix(&power);
     return result;
+}
+
+double frobenious_norm(matrix mat)
+{
+    double total = 0;
+    for (size_t i = 0; i < mat.height * mat.width; ++i)
+        total += (*(mat.mat + i)) * (*(mat.mat + i));
+
+    return sqrt(total);
 }
