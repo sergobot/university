@@ -110,17 +110,29 @@ matrix inverse(matrix mat)
     return inv;
 }
 
-matrix exponent(matrix mat, size_t power)
+matrix exponent(matrix mat)
 {
     if (mat.width != mat.height)
         return ERRONEOUS_MATRIX;
 
-    if (power == 1)
-        return copy(mat);
+    double q = 1;
+    matrix result = copy(mat);
+    matrix power = copy(mat);
 
-    matrix prev_exp = exponent(mat, power - 1);
-    matrix result = dot(prev_exp, mat);
-    destroy_matrix(&prev_exp);
+    for (int i = 2; i < 10; ++i)
+    {
+        matrix temp = dot(power, mat);
+        q /= i;
+        mul(temp, q);
+        matrix temp2 = add(result, temp);
 
+        destroy_matrix(&power);
+        power.mat = temp.mat;
+
+        destroy_matrix(&result);
+        result.mat = temp2.mat;
+    }
+
+    destroy_matrix(&power);
     return result;
 }

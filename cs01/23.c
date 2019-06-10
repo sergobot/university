@@ -16,9 +16,12 @@ int main()
         return 1;
     }
     matrix mat = read_matrix(a, b);
+
+    print_matrix(mat);
+
     matrix inv = inverse(mat);
     matrix trans = transpose(mat);
-    matrix exp2 = exponent(mat, 2);
+    matrix exp = exponent(mat);
 
     printf("\nInverse:\n");
     if (inv.mat == NULL)
@@ -35,12 +38,13 @@ int main()
     else
         print_matrix(trans);
 
-    printf("\nMatrix to the power of 2:\n");
-    print_matrix(exp2);
+    printf("\nExponent\n");
+    print_matrix(exp);
 
     destroy_matrix(&mat);
     destroy_matrix(&inv);
     destroy_matrix(&trans);
+    //destroy_matrix(&exp);
 
     return 0;
 }

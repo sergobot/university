@@ -15,6 +15,6 @@ void add_rows(matrix mat, size_t a, size_t b);
 
 matrix transpose(matrix mat);
 matrix inverse(matrix mat);
-matrix exponent(matrix mat, size_t power);
+matrix exponent(matrix mat);
 
 #endif // MATRIX_OPERATIONS_H
