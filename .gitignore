@@ -1,7 +1,8 @@
 ### https://raw.github.com/github/gitignore/210c95bb02f629e5166c21e888b10d0c26442fe7/C.gitignore
 
 # Build dir
-build
+build/
+out/
 
 # Useless Code::Blocks stuff
 *.layout
@@ -62,3 +63,4 @@ dkms.conf
 
 # Intellij IDEA and CLion directory
 .idea
+.gradle
