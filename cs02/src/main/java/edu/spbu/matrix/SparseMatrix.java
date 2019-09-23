@@ -7,7 +7,7 @@ public class SparseMatrix implements Matrix
 {
   /**
    * загружает матрицу из файла
-   * @param fileName
+   * @param fileName - path to the text file with matrix
    */
   public SparseMatrix(String fileName) {
 
@@ -16,8 +16,8 @@ public class SparseMatrix implements Matrix
    * однопоточное умнджение матриц
    * должно поддерживаться для всех 4-х вариантов
    *
-   * @param o
-   * @return
+   * @param o - another matrix to multiply by
+   * @return resulting matrix of the multiplication
    */
   @Override public Matrix mul(Matrix o)
   {
@@ -27,8 +27,8 @@ public class SparseMatrix implements Matrix
   /**
    * многопоточное умножение матриц
    *
-   * @param o
-   * @return
+   * @param o - another matrix to multiply by
+   * @return resulting matrix of the multiplication
    */
   @Override public Matrix dmul(Matrix o)
   {
@@ -37,8 +37,9 @@ public class SparseMatrix implements Matrix
 
   /**
    * спавнивает с обоими вариантами
-   * @param o
-   * @return
+   *
+   * @param o - an object to compare against
+   * @return true if equals
    */
   @Override public boolean equals(Object o) {
     return false;
