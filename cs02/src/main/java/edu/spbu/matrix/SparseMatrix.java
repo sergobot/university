@@ -46,18 +46,18 @@ public class SparseMatrix implements Matrix
   }
 
   @Override
-  public Double get(Integer i, Integer j) {
-    return null;
+  public double get(int i, int j) {
+    return 0;
   }
 
   @Override
-  public Integer getHeight() {
-    return null;
+  public int getHeight() {
+    return 0;
   }
 
   @Override
-  public Integer getWidth() {
-    return null;
+  public int getWidth() {
+    return 0;
   }
 
 }

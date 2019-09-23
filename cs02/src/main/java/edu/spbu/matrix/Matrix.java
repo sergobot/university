@@ -28,17 +28,17 @@ public interface Matrix
    * @param j - horizontal coordinate of the element
    * @return the element at (i, j)
    */
-  Double get(Integer i, Integer j);
+  double get(int i, int j);
 
   /**
    * Returns height of a matrix
    * @return height
    */
-  Integer getHeight();
+  int getHeight();
 
   /**
    * Returns width of a matrix
    * @return width
    */
-  Integer getWidth();
+  int getWidth();
 }
