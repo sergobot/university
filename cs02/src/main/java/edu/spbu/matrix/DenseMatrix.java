@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Плотная матрица
@@ -29,28 +27,30 @@ public class DenseMatrix implements Matrix {
   public DenseMatrix(String fileName) throws RuntimeException {
     this.width = 0;
     this.height = 0;
-    ArrayList<Double> temp = new ArrayList<Double>();
+    ArrayList<double[]> temp = new ArrayList<>();
     try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-      String line;
+      String line = br.readLine();
+      double[] matrixRow = Arrays.stream(line.split("\\s+"))
+          .mapToDouble(Double::parseDouble).toArray();
+      this.width = matrixRow.length;
+      this.height = 1;
+      temp.add(matrixRow);
 
       while ((line = br.readLine()) != null) {
-        List<Double> matrixRow = Arrays.stream(line.split("\\s+")).mapToDouble(Double::parseDouble).boxed().collect(Collectors.toList());
+        matrixRow = Arrays.stream(line.split("\\s+"))
+            .mapToDouble(Double::parseDouble).toArray();
 
-        if (this.width == 0) {
-          this.width = matrixRow.size();
-        }
-        if (matrixRow.size() != this.width) {
+        if (matrixRow.length != this.width) {
           throw new RuntimeException("Unable to load matrix from " + fileName + ": rows have different length!");
         }
 
-        temp.addAll(matrixRow);
-
+        temp.add(matrixRow);
         ++this.height;
       }
 
       this.array = new double[this.height * this.width];
-      for (int i = 0; i < this.height * this.width; ++i) {
-        this.array[i] = temp.get(i);
+      for (int i = 0; i < this.height; ++i) {
+        System.arraycopy(temp.get(i), 0, this.array, this.width * i, this.height);
       }
     } catch (IOException e) {
       e.printStackTrace();
@@ -67,7 +67,8 @@ public class DenseMatrix implements Matrix {
   @Override
   public Matrix mul(Matrix o) {
     if (o instanceof DenseMatrix && this.getWidth() == o.getHeight()) {
-      int newHeight = this.getHeight(), newWidth = o.getWidth();
+      DenseMatrix dm = (DenseMatrix) o;
+      int newHeight = this.height, newWidth = dm.width;
       DenseMatrix out = new DenseMatrix(newHeight, newWidth);
 
       out.array = new double[newHeight * newWidth];
@@ -75,7 +76,7 @@ public class DenseMatrix implements Matrix {
       for (int i = 0; i < newHeight; ++i) {
         for (int j = 0; j < newWidth; ++j) {
           for (int k = 0; k < this.width; ++k) {
-            out.array[pos + j] += this.get(i, k) * o.get(k, j);
+            out.array[pos + j] += this.array[pos + k] * dm.array[k * dm.width + j];
           }
         }
         pos += newWidth;
