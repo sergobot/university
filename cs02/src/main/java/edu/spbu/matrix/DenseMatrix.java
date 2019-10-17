@@ -3,20 +3,23 @@ package edu.spbu.matrix;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 /**
  * Плотная матрица
  */
 public class DenseMatrix implements Matrix {
   private int height, width;
-  private double[] array;
+  private double[][] array;
+  private int hashCode;
 
-  private DenseMatrix(int height, int width) {
+  private DenseMatrix(int height, int width, double[][] array) {
     this.height = height;
     this.width = width;
-    this.array = null;
+    this.array = array;
+
+    this.hashCode = Arrays.deepHashCode(this.array);
   }
 
   /**
@@ -27,7 +30,7 @@ public class DenseMatrix implements Matrix {
   public DenseMatrix(String fileName) throws RuntimeException {
     this.width = 0;
     this.height = 0;
-    ArrayList<double[]> temp = new ArrayList<>();
+    LinkedList<double[]> temp = new LinkedList<>();
     try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
       String line = br.readLine();
       double[] matrixRow = Arrays.stream(line.split("\\s+"))
@@ -48,10 +51,11 @@ public class DenseMatrix implements Matrix {
         ++this.height;
       }
 
-      this.array = new double[this.height * this.width];
+      this.array = new double[this.height][];
       for (int i = 0; i < this.height; ++i) {
-        System.arraycopy(temp.get(i), 0, this.array, this.width * i, this.height);
+        array[i] = temp.get(i);
       }
+      this.hashCode = Arrays.deepHashCode(this.array);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -69,19 +73,16 @@ public class DenseMatrix implements Matrix {
     if (o instanceof DenseMatrix && this.getWidth() == o.getHeight()) {
       DenseMatrix dm = (DenseMatrix) o;
       int newHeight = this.height, newWidth = dm.width;
-      DenseMatrix out = new DenseMatrix(newHeight, newWidth);
 
-      out.array = new double[newHeight * newWidth];
-      int pos = 0;
+      double[][] out = new double[newHeight][newWidth];
       for (int i = 0; i < newHeight; ++i) {
         for (int j = 0; j < newWidth; ++j) {
           for (int k = 0; k < this.width; ++k) {
-            out.array[pos + j] += this.array[pos + k] * dm.array[k * dm.width + j];
+            out[i][j] += this.array[i][k] * dm.array[k][j];
           }
         }
-        pos += newWidth;
       }
-      return out;
+      return new DenseMatrix(newHeight, newWidth, out);
     }
     return null;
   }
@@ -111,13 +112,16 @@ public class DenseMatrix implements Matrix {
 
     if (o instanceof DenseMatrix) {
       DenseMatrix dm = (DenseMatrix) o;
-      if (this.getHeight() != dm.getHeight() || this.getWidth() != dm.getWidth()) {
+
+      if (this.hashCode != dm.hashCode) {
         return false;
       }
 
-      for (int i = 0; i < this.getHeight() * this.getWidth(); ++i) {
-        if (this.array[i] != dm.array[i]) {
-          return false;
+      for (int i = 0; i < this.getHeight(); ++i) {
+        for (int j = 0; j < this.getWidth(); ++j) {
+          if (this.array[i][j] != dm.array[i][j]) {
+            return false;
+          }
         }
       }
       return true;
@@ -132,10 +136,7 @@ public class DenseMatrix implements Matrix {
 
   @Override
   public double get(int i, int j) {
-    if (i < this.getHeight() && j < this.getWidth()) {
-      return this.array[this.width * i + j];
-    }
-    return 0;
+    return this.array[i][j];
   }
 
   @Override
