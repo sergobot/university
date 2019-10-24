@@ -71,14 +71,14 @@ public class DenseMatrix implements Matrix {
   @Override
   public Matrix mul(Matrix o) {
     if (o instanceof DenseMatrix && this.getWidth() == o.getHeight()) {
-      DenseMatrix dm = (DenseMatrix) o;
-      int newHeight = this.height, newWidth = dm.width;
+      DenseMatrix dm = ((DenseMatrix) o).transpose();
+      int newHeight = this.height, newWidth = dm.height;
 
       double[][] out = new double[newHeight][newWidth];
       for (int i = 0; i < newHeight; ++i) {
         for (int j = 0; j < newWidth; ++j) {
           for (int k = 0; k < this.width; ++k) {
-            out[i][j] += this.array[i][k] * dm.array[k][j];
+            out[i][j] += this.array[i][k] * dm.array[j][k];
           }
         }
       }
@@ -147,5 +147,15 @@ public class DenseMatrix implements Matrix {
   @Override
   public int getWidth() {
     return this.width;
+  }
+
+  private DenseMatrix transpose() {
+    double[][] out = new double[this.width][this.height];
+    for (int i = 0; i < this.height; ++i) {
+      for (int j = 0; j < this.width; ++j) {
+        out[j][i] = this.array[i][j];
+      }
+    }
+    return new DenseMatrix(this.width, this.height, out);
   }
 }
