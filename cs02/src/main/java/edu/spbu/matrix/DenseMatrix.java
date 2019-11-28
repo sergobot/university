@@ -14,7 +14,7 @@ public class DenseMatrix implements Matrix {
   private double[][] array;
   private int hashCode;
 
-  private DenseMatrix(int height, int width, double[][] array) {
+  DenseMatrix(int height, int width, double[][] array) {
     this.height = height;
     this.width = width;
     this.array = array;
@@ -72,13 +72,26 @@ public class DenseMatrix implements Matrix {
   public Matrix mul(Matrix o) {
     if (o instanceof DenseMatrix && this.getWidth() == o.getHeight()) {
       DenseMatrix dm = ((DenseMatrix) o).transpose();
-      int newHeight = this.height, newWidth = dm.height;
+      int newHeight = this.height, newWidth = dm.width;
 
       double[][] out = new double[newHeight][newWidth];
       for (int i = 0; i < newHeight; ++i) {
         for (int j = 0; j < newWidth; ++j) {
           for (int k = 0; k < this.width; ++k) {
             out[i][j] += this.array[i][k] * dm.array[j][k];
+          }
+        }
+      }
+      return new DenseMatrix(newHeight, newWidth, out);
+    } else if (o instanceof SparseMatrix && this.getWidth() == o.getHeight()) {
+      SparseMatrix sm = (SparseMatrix) o;
+      int newHeight = this.height, newWidth = sm.getWidth();
+
+      double[][] out = new double[newHeight][newWidth];
+      for (int i = 0; i < newHeight; ++i) {
+        for (int j = 0; j < newWidth; ++j) {
+          for (int k = 0; k < this.width; ++k) {
+            out[i][j] += this.array[i][k] * sm.get(k, j);
           }
         }
       }
@@ -128,7 +141,21 @@ public class DenseMatrix implements Matrix {
     }
 
     if (o instanceof SparseMatrix) {
-      return false;
+      SparseMatrix sm = (SparseMatrix) o;
+      if (this.width != sm.getWidth() || this.height != sm.getHeight()) {
+        return false;
+      }
+
+      for (int i = 0; i < this.height; ++i) {
+        for (int j = 0; j < this.width; ++j) {
+          if (this.array[i][j] != sm.get(i, j)) {
+            return false;
+          }
+        }
+      }
+
+      return true;
+
     }
 
     return false;

@@ -41,7 +41,7 @@ public class MatrixGenerator
     {
       new MatrixGenerator(SEED1, EMPTY_ROW_FRACTION, MATRIX1_NAME, SIZE).generate();
       new MatrixGenerator(SEED2, EMPTY_ROW_FRACTION, MATRIX2_NAME, SIZE).generate();
-      testPerformance();
+//      testPerformance();
     }
     catch (IOException e)
     {
