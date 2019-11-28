@@ -42,18 +42,19 @@ class MatrixMultiplier {
   }
 
   private static DenseMatrix mul(DenseMatrix m1, SparseMatrix m2) {
-    return mul(m2.transpose(), (m1.transpose())).transpose();
+    return mul(m2.transpose(), m1.transpose()).transpose();
   }
 
   private static DenseMatrix mul(SparseMatrix m1, DenseMatrix m2) {
     int newHeight = m1.getHeight(), newWidth = m2.getWidth();
+    m2 = m2.transpose();
 
     double[][] out = new double[newHeight][newWidth];
     for (int k = 0; k < newHeight; ++k) {
       for (int i = 0; i < newHeight; ++i) {
         double sum = out[i][k];
         for (int jj = m1.rows[i]; jj < m1.rows[i + 1]; ++jj) {
-          sum += m1.values[jj] * m2.array[m1.cols[jj]][k];
+          sum += m1.values[jj] * m2.array[k][m1.cols[jj]];
         }
         out[i][k] = sum;
       }
