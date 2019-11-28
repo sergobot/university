@@ -22,6 +22,11 @@ public interface Matrix
    */
   Matrix dmul(Matrix o);
 
+  /** Transpose the matrix and return a copy
+   * @return a copy of M^T
+   */
+  Matrix transpose();
+
   /**
    * Returns an element at specific position
    * @param i - vertical coordinate of the element

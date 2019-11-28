@@ -337,6 +337,44 @@ public class SparseMatrix implements Matrix
     return this.hashCode;
   }
 
+  public SparseMatrix transpose() {
+    final int nnz = this.rows[this.height];
+
+    int[] newRows = new int[this.width + 1];
+    int[] newCols = new int[nnz];
+    double[] newValues = new double[nnz];
+
+    for (int i = 0; i < nnz; ++i){
+      ++newRows[this.cols[i]];
+    }
+
+    for(int col = 0, sum = 0; col <= this.width; ++col){
+      int temp  = newRows[col];
+      newRows[col] = sum;
+      sum += temp;
+    }
+
+    for(int row = 0; row < this.height; ++row){
+      for(int jj = this.rows[row]; jj < this.rows[row + 1]; ++jj){
+        int col  = this.cols[jj];
+        int dest = newRows[col];
+
+        newCols[dest] = row;
+        newValues[dest] = this.values[jj];
+
+        ++newRows[col];
+      }
+    }
+
+    for(int col = 0, last = 0; col <= this.width; col++){
+      int temp  = newRows[col];
+      newRows[col] = last;
+      last    = temp;
+    }
+
+    return new SparseMatrix(this.width, this.height, newRows, newCols, newValues);
+  }
+
   public String toString() {
     String str = "";
 

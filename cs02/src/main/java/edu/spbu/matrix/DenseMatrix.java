@@ -84,18 +84,8 @@ public class DenseMatrix implements Matrix {
       }
       return new DenseMatrix(newHeight, newWidth, out);
     } else if (o instanceof SparseMatrix && this.getWidth() == o.getHeight()) {
-      SparseMatrix sm = (SparseMatrix) o;
-      int newHeight = this.height, newWidth = sm.getWidth();
-
-      double[][] out = new double[newHeight][newWidth];
-      for (int i = 0; i < newHeight; ++i) {
-        for (int j = 0; j < newWidth; ++j) {
-          for (int k = 0; k < this.width; ++k) {
-            out[i][j] += this.array[i][k] * sm.get(k, j);
-          }
-        }
-      }
-      return new DenseMatrix(newHeight, newWidth, out);
+      SparseMatrix sm = ((SparseMatrix) o).transpose();
+      return sm.mul(this.transpose()).transpose();
     }
     return null;
   }
@@ -176,7 +166,7 @@ public class DenseMatrix implements Matrix {
     return this.width;
   }
 
-  private DenseMatrix transpose() {
+  public DenseMatrix transpose() {
     double[][] out = new double[this.width][this.height];
     for (int i = 0; i < this.height; ++i) {
       for (int j = 0; j < this.width; ++j) {
