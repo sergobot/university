@@ -3,7 +3,9 @@ package edu.spbu.matrix;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  * Разряженная матрица
@@ -11,12 +13,11 @@ import java.util.*;
 public class SparseMatrix implements Matrix
 {
   private int height, width;
-  private int[] rows, cols;
-  private double[] values;
+  int[] rows, cols;
+  double[] values;
   private int hashCode;
 
-
-  private SparseMatrix(int height, int width, int[] rows, int[] cols, double[] values) {
+  SparseMatrix(int height, int width, int[] rows, int[] cols, double[] values) {
     this.height = height;
     this.width = width;
     this.rows = rows;
@@ -118,124 +119,7 @@ public class SparseMatrix implements Matrix
    */
   @Override public Matrix mul(Matrix o)
   {
-    if (o instanceof SparseMatrix && this.getWidth() == o.getHeight()) {
-      return mul((SparseMatrix) o);
-    } else if (o instanceof DenseMatrix && this.getWidth() == o.getHeight()) {
-      DenseMatrix dm = (DenseMatrix) o;
-      int newHeight = this.height, newWidth = dm.getWidth();
-
-      double[][] out = new double[newHeight][newWidth];
-      for (int k = 0; k < this.height; ++k) {
-        for (int i = 0; i < this.height; ++i) {
-          double sum = out[i][k];
-          for (int jj = this.rows[i]; jj < this.rows[i + 1]; ++jj) {
-            sum += this.values[jj] * dm.get(this.cols[jj], k);
-          }
-          out[i][k] = sum;
-        }
-      }
-
-      return new DenseMatrix(newHeight, newWidth, out);
-    }
-    return null;
-  }
-
-  private SparseMatrix mul(SparseMatrix sm) {
-    // Part 1: compute CSR row pointer (new_rows)
-    int[] newRows = new int[this.height + 1];
-    newRows[0] = 0;
-
-    int[] mask = new int[this.width];
-    Arrays.fill(mask, -1);
-
-    int newNnzCount = 0;
-    for (int i = 0; i < this.height; i++) {
-      int rowNnz = 0;
-
-      for (int jj = this.rows[i]; jj < this.rows[i + 1]; ++jj) {
-        int j = this.cols[jj];
-        for (int kk = sm.rows[j]; kk < sm.rows[j + 1]; kk++) {
-          int k = sm.cols[kk];
-          if (mask[k] != i) {
-            mask[k] = i;
-            rowNnz++;
-          }
-        }
-      }
-
-      newNnzCount = newNnzCount + rowNnz;
-      newRows[i + 1] = newNnzCount;
-    }
-
-    // Part 2: computing column indices and array of nonzero elements
-    int[] newCols = new int[newNnzCount];
-    double[] newValues = new double[newNnzCount];
-    int[] next = new int[this.width];
-    int[] sums = new int[this.width];
-    Arrays.fill(next, -1);
-    Arrays.fill(sums, 0);
-
-    newNnzCount = 0;
-
-    for (int i = 0; i < this.height; ++i) {
-      int head = -2;
-      int length = 0;
-
-      int jj_start = this.rows[i];
-      int jj_end = this.rows[i + 1];
-      for (int jj = jj_start; jj < jj_end; ++jj) {
-        int j = this.cols[jj];
-        double v = this.values[jj];
-
-        int kk_start = sm.rows[j];
-        int kk_end = sm.rows[j + 1];
-        for (int kk = kk_start; kk < kk_end; ++kk) {
-          int k = sm.cols[kk];
-
-          sums[k] += v * sm.values[kk];
-
-          if (next[k] == -1) {
-            next[k] = head;
-            head = k;
-            ++length;
-          }
-        }
-      }
-
-      for (int jj = 0; jj < length; ++jj) {
-        if (sums[head] != 0) {
-          newCols[newNnzCount] = head;
-          newValues[newNnzCount] = sums[head];
-          ++newNnzCount;
-        }
-
-        int temp = head;
-        head = next[head];
-
-        next[temp] = -1; //clear arrays
-        sums[temp] = 0;
-      }
-    }
-
-    // Part 3: sort column indices
-    for(int i = 0; i < this.height; i++){
-      int row_start = newRows[i];
-      int row_end = newRows[i+1];
-
-      ArrayList<AbstractMap.Entry<Integer, Double>> temp = new ArrayList<>(Collections.nCopies(row_end - row_start, null));
-      for (int jj = row_start, n = 0; jj < row_end; jj++, n++){
-        temp.set(n, new AbstractMap.SimpleEntry<>(newCols[jj], newValues[jj]));
-      }
-
-      temp.sort(Comparator.comparing(Map.Entry::getKey));
-
-      for(int jj = row_start, n = 0; jj < row_end; jj++, n++){
-        newCols[jj] = temp.get(n).getKey();
-        newValues[jj] = temp.get(n).getValue();
-      }
-    }
-
-    return new SparseMatrix(this.height, sm.width, newRows, newCols, newValues);
+    return MatrixMultiplier.mul(this, o);
   }
 
   /**
@@ -376,15 +260,15 @@ public class SparseMatrix implements Matrix
   }
 
   public String toString() {
-    String str = "";
+    StringBuilder str = new StringBuilder();
 
     for (int i = 0; i < this.height; ++i) {
       for (int j = 0; j < this.width; ++j) {
-        str += this.get(i, j) + " ";
+        str.append(this.get(i, j)).append(" ");
       }
-      str += "\n";
+      str.append("\n");
     }
-    return str;
+    return str.toString();
   }
 
 }

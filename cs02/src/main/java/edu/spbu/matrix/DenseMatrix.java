@@ -11,7 +11,7 @@ import java.util.LinkedList;
  */
 public class DenseMatrix implements Matrix {
   private int height, width;
-  private double[][] array;
+  double[][] array;
   private int hashCode;
 
   DenseMatrix(int height, int width, double[][] array) {
@@ -70,24 +70,7 @@ public class DenseMatrix implements Matrix {
    */
   @Override
   public Matrix mul(Matrix o) {
-    if (o instanceof DenseMatrix && this.getWidth() == o.getHeight()) {
-      DenseMatrix dm = ((DenseMatrix) o).transpose();
-      int newHeight = this.height, newWidth = dm.width;
-
-      double[][] out = new double[newHeight][newWidth];
-      for (int i = 0; i < newHeight; ++i) {
-        for (int j = 0; j < newWidth; ++j) {
-          for (int k = 0; k < this.width; ++k) {
-            out[i][j] += this.array[i][k] * dm.array[j][k];
-          }
-        }
-      }
-      return new DenseMatrix(newHeight, newWidth, out);
-    } else if (o instanceof SparseMatrix && this.getWidth() == o.getHeight()) {
-      SparseMatrix sm = ((SparseMatrix) o).transpose();
-      return sm.mul(this.transpose()).transpose();
-    }
-    return null;
+    return MatrixMultiplier.mul(this, o);
   }
 
   /**
