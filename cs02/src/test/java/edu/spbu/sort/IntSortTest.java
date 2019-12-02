@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by artemaliev on 07/09/15.
@@ -23,7 +23,7 @@ public class IntSortTest
    * @return random generated int array. It will be the same for the same seed and size.
    */
   int[] generateRandomIntArray(int size, long seed) {
-    int array[] = new int[size];
+    int[] array = new int[size];
     Random rnd = new Random(seed);
     for (int i = 0 ; i < array.length; i++) {
       array[i] = rnd.nextInt();
@@ -33,7 +33,7 @@ public class IntSortTest
 
   @Test
   public void testSortArray() throws Exception {
-    int array[] = generateRandomIntArray(ARRAY_SIZE, SEED);
+    int[] array = generateRandomIntArray(ARRAY_SIZE, SEED);
 
     IntSort.sort(array);
 
@@ -47,7 +47,7 @@ public class IntSortTest
 
   @Test
   public void testSortList() throws Exception {
-    int array[] = generateRandomIntArray(ARRAY_SIZE, SEED);
+    int[] array = generateRandomIntArray(ARRAY_SIZE, SEED);
     List<Integer> list = new ArrayList<Integer>(ARRAY_SIZE);
     for (int i: array) {
       list.add(Integer.valueOf(i));

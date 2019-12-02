@@ -110,6 +110,7 @@ public class SparseMatrix implements Matrix
       e.printStackTrace();
     }
   }
+
   /**
    * однопоточное умнджение матриц
    * должно поддерживаться для всех 4-х вариантов
@@ -130,7 +131,7 @@ public class SparseMatrix implements Matrix
    */
   @Override public Matrix dmul(Matrix o)
   {
-    return null;
+    return MatrixMultiplier.dmul(this, o);
   }
 
   /**
@@ -189,6 +190,45 @@ public class SparseMatrix implements Matrix
     }
 
     return false;
+  }
+
+  public SparseMatrix submatrix(int x1, int x2, int y1, int y2) {
+    int newHeight = x2 - x1, newWidth = y2 - y1;
+    int[] newRows = new int[newHeight + 1];
+
+    for (int i = 0; i < newHeight; ++i) {
+      newRows[i] = this.rows[x1 + i] - this.rows[x1];
+    }
+
+    int nnz = 0;
+    for (int i = 0; i < newHeight; ++i) {
+      int row_start = this.rows[x1 + i];
+      int row_end = this.rows[x1 + i + 1];
+
+      for (int jj = row_start; jj < row_end; ++jj) {
+        if ((this.cols[jj] >= y1) && (this.cols[jj] < y2)) {
+          ++nnz;
+        }
+      }
+    }
+
+    int[] newCols = new int[nnz];
+    double[] newValues = new double[nnz];
+
+    for (int i = 0, dest = 0; i < newHeight; ++i) {
+      int row_start = this.rows[x1 + i];
+      int row_end = this.rows[x1 + i + 1];
+
+      for (int jj = row_start; jj < row_end; ++jj) {
+        if ((this.cols[jj] >= y1) && (this.cols[jj] < y2)) {
+          newCols[dest] = this.cols[jj] - y1;
+          newValues[dest] = this.values[jj];
+          ++dest;
+        }
+      }
+      newRows[i + 1] = dest;
+    }
+    return new SparseMatrix(newHeight, newWidth, newRows, newCols, newValues);
   }
 
   @Override
@@ -256,19 +296,7 @@ public class SparseMatrix implements Matrix
       last    = temp;
     }
 
+    //noinspection SuspiciousNameCombination
     return new SparseMatrix(this.width, this.height, newRows, newCols, newValues);
   }
-
-  public String toString() {
-    StringBuilder str = new StringBuilder();
-
-    for (int i = 0; i < this.height; ++i) {
-      for (int j = 0; j < this.width; ++j) {
-        str.append(this.get(i, j)).append(" ");
-      }
-      str.append("\n");
-    }
-    return str.toString();
-  }
-
 }

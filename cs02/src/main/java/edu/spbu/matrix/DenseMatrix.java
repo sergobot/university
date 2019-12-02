@@ -81,7 +81,7 @@ public class DenseMatrix implements Matrix {
    */
   @Override
   public Matrix dmul(Matrix o) {
-    return null;
+    return MatrixMultiplier.dmul(this, o);
   }
 
   /**
@@ -128,10 +128,19 @@ public class DenseMatrix implements Matrix {
       }
 
       return true;
-
     }
 
     return false;
+  }
+
+  public DenseMatrix submatrix(int x1, int x2, int y1, int y2) {
+    double[][] out = new double[x2 - x1][];
+
+    for (int i = 0; i < x2 - x1; ++i) {
+      out[i] = Arrays.copyOfRange(this.array[i + x1], y1, y2);
+    }
+
+    return new DenseMatrix(x2 - x1, y2 - y1, out);
   }
 
   @Override
@@ -156,6 +165,7 @@ public class DenseMatrix implements Matrix {
         out[j][i] = this.array[i][j];
       }
     }
+    //noinspection SuspiciousNameCombination
     return new DenseMatrix(this.width, this.height, out);
   }
 }

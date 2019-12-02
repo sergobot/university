@@ -22,10 +22,27 @@ public interface Matrix
    */
   Matrix dmul(Matrix o);
 
-  /** Transpose the matrix and return a copy
+  /**
+   * Transpose the matrix and return a copy
    * @return a copy of M^T
    */
   Matrix transpose();
+
+  /**
+   * Extract a submatrix contained within this square, including the edges:
+   * (x1, y1) ----------- (x1, y2 - 1)
+   * |                        |
+   * |                        |
+   * |                        |
+   * (x2 - 1, y1) ------- (x2 - 1, y2 - 1)
+   *
+   * @param x1 - first coordinate of the first row
+   * @param x2 - first coordinate of the row next to the last one
+   * @param y1 - second coordinate of the first column
+   * @param y2 - second coordinate of the column next to the last one
+   * @return Matrix of the same type and size of (x2 - x1, y2 - y1)
+   */
+  Matrix submatrix(int x1, int x2, int y1, int y2);
 
   /**
    * Returns an element at specific position
