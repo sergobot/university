@@ -14,7 +14,7 @@ public class HTTPFileDownloader {
   public String download(String serverAddress, int port, String path) throws IOException {
     this.client.connect(serverAddress, port);
     System.out.println("Connected successfully!");
-    this.client.sendRequest("GET " + path + " HTTP/1.1\r\nHost: " + serverAddress + "\r\n\r\n");
+    this.client.sendRequest("GET " + path + " HTTP/1.1\r\nHost: " + serverAddress + "\r\nConnection: close\r\n\r\n");
     System.out.println("Request sent successfully!");
     String response = this.client.getResponse();
     System.out.println("Response received successfully!");
@@ -25,6 +25,6 @@ public class HTTPFileDownloader {
 
   public static void main(String[] args) throws IOException {
     HTTPFileDownloader d = new HTTPFileDownloader();
-    System.out.println(d.download("math.spbu.ru", 80, "/rus"));
+    System.out.println(d.download("www.google.com", 80, "/"));
   }
 }

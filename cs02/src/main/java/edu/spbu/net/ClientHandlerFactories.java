@@ -2,6 +2,8 @@ package edu.spbu.net;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class ClientHandlerFactories {
   public static class CapitalizerFactory implements ClientHandlerFactory {
@@ -25,10 +27,8 @@ public class ClientHandlerFactories {
   }
 
   public static class HTTPFilerServerFactory implements ClientHandlerFactory {
-    String filename;
 
-    public HTTPFilerServerFactory(String filename) {
-      this.filename = filename;
+    public HTTPFilerServerFactory() {
     }
 
     @Override
@@ -40,32 +40,47 @@ public class ClientHandlerFactories {
 
           BufferedReader inputReader = new BufferedReader(new InputStreamReader(in));
 
-          String temp;
-          while (!(temp = inputReader.readLine()).equals(""))
-            System.out.println(temp);
-
-          File file = new File(this.filename);
+          String temp = inputReader.readLine();
+          String filename = "." + temp.split(" ")[1];
           String response;
+
+          File file = new File(filename);
           if (file.exists()) {
-            FileReader fileReader = new FileReader(file);
-            BufferedReader br = new BufferedReader(fileReader);
-
-            StringBuilder b = new StringBuilder();
-            String st;
-            while ((st = br.readLine()) != null)
-              b.append(st);
-            String content = b.toString();
-
             response = "HTTP/1.1 200 OK\r\n" +
                 "Server: Sergobot's file server\r\n" +
                 "Content-Type: text/html\r\n" +
-                "Connection: close\r\n\r\n" + content;
+                "Connection: close\r\n\r\n";
+
+            if (file.isDirectory()) {
+              StringBuilder html = new StringBuilder();
+              html.append("<!doctype html><html><body>");
+
+              Files.list(new File(filename).toPath())
+                  .forEach(path -> {
+                    String p = path.toString().substring(2);
+                    html.append("<a href=\"/").append(p).append("\">").append(p).append("</a><br>");
+                  });
+
+              html.append("</body></html>");
+              response += html.toString();
+            } else {
+              FileReader fileReader = new FileReader(file);
+              BufferedReader br = new BufferedReader(fileReader);
+
+              StringBuilder b = new StringBuilder();
+              String st;
+              while ((st = br.readLine()) != null)
+                b.append(st).append("\r\n");
+              String content = b.toString();
+
+              response += content;
+            }
           } else {
             response = "HTTP/1.1 404 OK\r\n" +
                 "Server: Sergobot's file server\r\n" +
                 "Content-Type: text/html\r\n" +
                 "Connection: close\r\n\r\n" +
-                "<htlm><h1>404: File not found!</h1?</html>";
+                "<htlm><h1>404: File not found!</h1></html>";
           }
 
           out.write(response.getBytes());

@@ -5,7 +5,7 @@ import edu.spbu.net.UniversalTCPServer;
 
 public class HTTPFileServer {
   public static void main(String[] args) {
-    UniversalTCPServer s = new UniversalTCPServer(8080, new ClientHandlerFactories.HTTPFilerServerFactory("build.gradle"), 20);
+    UniversalTCPServer s = new UniversalTCPServer(8080, new ClientHandlerFactories.HTTPFilerServerFactory(), 20);
     s.start();
   }
 }
