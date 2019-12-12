@@ -195,11 +195,11 @@ class MatrixMultiplier {
     }
 
     leftSubmatrices[parts - 1] = m1.submatrix(
-        m1.getHeight() % firstSize + firstSize, m1.getHeight(),
+        m1.getHeight() % firstSize + firstSize * m1.getHeight(), m1.getHeight(),
         0, commonSize);
     rightSubmatrices[parts - 1] = m2.submatrix(
         0, commonSize,
-        m2.getWidth() % secondSize + secondSize, m2.getWidth());
+        m2.getWidth() % secondSize + secondSize * m2.getWidth(), m2.getWidth());
 
     ArrayList<Future<Matrix>> results = new ArrayList<>(parts * parts);
     for (int i = 0; i < parts; ++i) {
