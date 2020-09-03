@@ -3,6 +3,8 @@
 #ifndef FIND_MAX_ROW_H
 #define FIND_MAX_ROW_H
 
+#include <stdlib.h>
+
 #ifndef ARRAY_SIZE
 #define ARRAY_SIZE 100
 #endif // ARRAY_SiZE

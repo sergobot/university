@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.0)
-project(cs01)
+
+project(introduction-to-c
+        LANGUAGES C)
+set(CMAKE_C_STANDARD 11)
 
 add_executable(3.2 3.2.c)
 add_executable(3.4 3.4.c)
@@ -32,3 +35,4 @@ target_link_libraries(9.4 m)
 target_link_libraries(10.1 m)
 target_link_libraries(10.2 m)
 target_link_libraries(13 m)
+target_link_libraries(23 m)
