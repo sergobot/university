@@ -15,6 +15,8 @@ airquality$Weekday <- weekdays(ISOdate(1973, airquality$Month, airquality$Day))
 # - Only weekends data should be emitted (=Sundays and Saturdays)
 aqFiltered <- filter(airquality, Weekday == "Saturday" | Weekday == "Sunday")
 
+write.table(aqFiltered,"output.csv",sep=",",row.names=TRUE)
+
 # - Days (month and date), when ozon level and solar radiation were maximal and minimal
 airquality[c("Ozone", "Month", "Day")][c(which.max(airquality$Ozone), which.min(airquality$Ozone)),]
 airquality[c("Solar.R", "Month", "Day")][c(which.max(airquality$Solar.R), which.min(airquality$Solar.R)),]
