@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
     if (argc == 1)
     {
         std::cout
-            << "This program replaces all occurences of alphabetic charactes in files with a '*'.\n\n"
+            << "This program replaces all occurrences of alphabetic charactes in files with a '*'.\n\n"
             << "Usage:\n"
             << "  ./task-6 INPUT_FILE [OUTPUT_FILE]\n\n"
             << "INPUT_FILE is mandatory, OUTPUT_FILE is not. If you don't provide the latter one,\n"
