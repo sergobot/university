@@ -1,0 +1,37 @@
+Each entry in the airline delay database represents the aggregate
+monthly data for a particular airline at a particular airport. For
+example, one entry might be the delay information for Southwest
+Airlines at St Louis Airport during December 2003.
+
+Each entry lists the number of flights, the number of flights delayed
+(15 minutes beyond the scheduled arrival time), the number of flights
+canceled and diverted, the minutes of delay due to carrier delay -
+weather delay - national air system delays - security delay. The _ct
+fields list the count of flights experiencing each delay (they add up
+the arr_del15 column). Because a flight can have multiple delay types,
+these numbers are real numbers. For example, if a flight was 30
+minutes late, 15 minutes due to weather and 15 minutes due to security
+it will contribute .5 to weather_ct and .5 to security_ct. It will
+also contribute 15 to the weather_delay field and 15 to the
+security_delay field.
+
+Finally, the arr_delay column is the sum of total delay minutes for
+the document (that is … arr_delay = carrier_delay+ weather_delay +
+nas_delay + security_delay + late_aircraft_delay)
+
+arr_flights Count of flights
+arr_del15 Count of flights delayed (>15minutes)
+carrier_ct Late due to carrier (maintenance or crew problems, aircraft
+cleaning, baggage loading, fueling, etc)
+weather_ct Late due to weather (Significant meteorological conditions )
+nas_ct Late due to National Aviation Delay System (non-extreme weather
+conditions, airport operations, heavy traffic volume, and air traffic
+control)
+security_ct Late due to evacuation of a terminal or concourse,
+re-boarding of aircraft because of security breach, inoperative
+screening equipment and/or long lines in excess of 29 minutes at
+screening areas
+late_aircraft_ct A previous flight with same aircraft arrived late,
+causing the present flight to depart late.
+arr_cancelled Count of aircraft cancelled
+arr_diverted Count of aircrafts diverted
