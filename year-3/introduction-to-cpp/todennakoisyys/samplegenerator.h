@@ -1,19 +1,18 @@
 #ifndef SAMPLEGENERATOR_H
 #define SAMPLEGENERATOR_H
 
-#include <QObject>
-
 #include "distribution.h"
 #include "sample.h"
 
-class SampleGenerator : public QObject
+/**
+ * @brief The SampleGenerator class provides a common ground for several sample generators,
+ * using different mathematical methods.
+ */
+template<typename TDistribution>
+class SampleGenerator
 {
-    Q_OBJECT
 public:
-    explicit SampleGenerator(QObject *parent = nullptr);
-    virtual ~SampleGenerator() {};
-
-    virtual Sample generate(const Distribution, size_t size);
+    virtual Sample generate(size_t size) = 0;
 };
 
 #endif // SAMPLEGENERATOR_H

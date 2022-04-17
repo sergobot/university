@@ -8,7 +8,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
@@ -24,20 +24,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #    endif()
 #endif()
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets Charts LinguistTools REQUIRED)
+find_package(QT NAMES Qt6 COMPONENTS Widgets Charts LinguistTools REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Charts LinguistTools REQUIRED)
 
 set(TS_FILES todennakoisyys_ru_RU.ts)
 
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
-        settingsdialog.cpp
-        settingsdialog.h
-        settingsdialog.ui
 
+        distribution.h
         groupeddiscretedistribution.cpp
         groupeddiscretedistribution.h
         discretedistribution.cpp
@@ -50,18 +45,35 @@ set(PROJECT_SOURCES
 
         sample.cpp
         sample.h
-        samplegenerator.cpp
+        groupedsample.h
+        groupedsample.cpp
+
         samplegenerator.h
         chensamplegenerator.cpp
         chensamplegenerator.h
         tablesamplegenerator.cpp
         tablesamplegenerator.h
 
+        chisquarecriterion.h
+        chisquarecriterion.cpp
+
         random_generator_provider.cpp
         random_generator_provider.h
 
+        mainwindow.h
+        mainwindow.cpp
+        mainwindow.ui
+
+        settingsdialog.h
+        settingsdialog.cpp
+        settingsdialog.ui
+
+        defaults.h
         resources.qrc
         ${TS_FILES}
+
+        3rdparty/probdist.h
+        3rdparty/probdist.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

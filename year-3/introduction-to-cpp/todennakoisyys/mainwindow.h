@@ -2,28 +2,39 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QtCharts/QChartView>
 
-QT_CHARTS_USE_NAMESPACE
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
+#include "groupeddiscretedistribution.h"
+#include "tablesamplegenerator.h"
+#include "chensamplegenerator.h"
+
+#include "settingsdialog.h"
+
+namespace Ui {
+class MainWindow;
+}
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private:
     Ui::MainWindow *ui;
 
-    void createActions();
+    GroupedDiscreteDistribution m_distribution;
+    TableSampleGenerator m_tableSampleGenerator;
+    ChenSampleGenerator m_chenSampleGenerator;
 
-    QChartView *chartView;
-    QWidget *centralWidget;
+    size_t m_sampleSize;
+    double m_alpha;
+    int m_generatorIndex;
+    size_t m_chenWindows;
+
+    void createActions();
+    void recreateDistributionAndGenerators(std::vector<GroupedPoint> newPoints);
 
 private slots:
     void promptUserForParameters();
@@ -35,4 +46,5 @@ private slots:
     void showAuthors();
     void openHelpLinkInWebBrowser();
 };
+
 #endif // MAINWINDOW_H
