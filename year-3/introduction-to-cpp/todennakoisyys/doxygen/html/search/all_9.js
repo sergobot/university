@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['tablesamplegenerator_0',['TableSampleGenerator',['../class_table_sample_generator.html',1,'TableSampleGenerator'],['../class_table_sample_generator.html#a19c45b6c64a76aac04ca716144eea6c4',1,'TableSampleGenerator::TableSampleGenerator()']]],
-  ['tablesamplegenerator_2ecpp_1',['tablesamplegenerator.cpp',['../tablesamplegenerator_8cpp.html',1,'']]],
-  ['tablesamplegenerator_2eh_2',['tablesamplegenerator.h',['../tablesamplegenerator_8h.html',1,'']]]
+  ['ui_0',['Ui',['../namespace_ui.html',1,'']]],
+  ['ui_1',['ui',['../class_settings_dialog.html#aef76017ec1056d6e88e6bb48cdf73b0f',1,'SettingsDialog']]],
+  ['ungroup_2',['ungroup',['../class_grouped_discrete_distribution.html#a1199f7f1a7c9b0294b6cb70432a9df9f',1,'GroupedDiscreteDistribution']]]
 ];

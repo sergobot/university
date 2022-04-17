@@ -8,7 +8,7 @@
  * @brief The TableSampleGenerator class performs simulating a distribution using the simplest
  * table method.
  */
-class TableSampleGenerator : public SampleGenerator<GroupedDiscreteDistribution>
+class TableSampleGenerator : public SampleGenerator
 {
 public:
     TableSampleGenerator(const GroupedDiscreteDistribution& distribution);

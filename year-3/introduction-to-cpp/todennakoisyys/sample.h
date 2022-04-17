@@ -11,8 +11,6 @@
 class Sample
 {
 public:
-    static const Sample EMPTY(std::vector<double>());
-
     Sample(std::vector<double> values);
 
     /**

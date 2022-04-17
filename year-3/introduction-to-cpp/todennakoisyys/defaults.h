@@ -31,6 +31,6 @@ static const TableSampleGenerator DEFAULT_TABLE_SAMPLE_GENERATOR(DEFAULT_GROUPED
 
 static const ChenSampleGenerator DEFAULT_CHEN_SAMPLE_GENERATOR(DEFAULT_DISCRETE_DISTRIBUTION, 3);
 
-static const size_t P_VALUE_COUNTS = 1000;
+static const size_t P_VALUE_COUNTS = 100;
 
 #endif // DEFAULTS_H

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['ungroup_0',['ungroup',['../class_grouped_discrete_distribution.html#a1199f7f1a7c9b0294b6cb70432a9df9f',1,'GroupedDiscreteDistribution']]]
+  ['value_0',['value',['../class_grouped_point.html#a3660a3ddc748bec8d5941b56a431b913',1,'GroupedPoint::value()'],['../class_point.html#afc3d52a1b54b2938e10e39bc03f0c19e',1,'Point::value()']]],
+  ['values_1',['values',['../class_grouped_sample.html#a08101054528df4d8f304a937ecef55e2',1,'GroupedSample']]]
 ];

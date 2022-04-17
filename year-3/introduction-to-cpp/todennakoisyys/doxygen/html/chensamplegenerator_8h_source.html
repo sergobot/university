@@ -23,7 +23,7 @@
   <td id="projectalign">
    <div id="projectname">Todennakoisyys<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">Yet another mostly useless program to model arbitrary discrete distributions</div>
+   <div id="projectbrief">Yet another mostly useless program to simulate arbitrary discrete distributions</div>
   </td>
  </tr>
  </tbody>
@@ -72,7 +72,7 @@ $(function() {
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="samplegenerator_8h.html">samplegenerator.h</a>&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="discretedistribution_8h.html">discretedistribution.h</a>&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="class_chen_sample_generator.html">   10</a></span><span class="keyword">class </span><a class="code hl_class" href="class_chen_sample_generator.html">ChenSampleGenerator</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_sample_generator.html">SampleGenerator</a>&lt;DiscreteDistribution&gt;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="class_chen_sample_generator.html">   10</a></span><span class="keyword">class </span><a class="code hl_class" href="class_chen_sample_generator.html">ChenSampleGenerator</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_sample_generator.html">SampleGenerator</a></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_function" href="class_chen_sample_generator.html#a0e4d7d91cc3d9d47d1bf0ebdff9ca161">ChenSampleGenerator</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_discrete_distribution.html">DiscreteDistribution</a>&amp; distribution, <span class="keywordtype">size_t</span> windows);</div>
@@ -89,7 +89,7 @@ $(function() {
 <div class="ttc" id="aclass_chen_sample_generator_html_a0e4d7d91cc3d9d47d1bf0ebdff9ca161"><div class="ttname"><a href="class_chen_sample_generator.html#a0e4d7d91cc3d9d47d1bf0ebdff9ca161">ChenSampleGenerator::ChenSampleGenerator</a></div><div class="ttdeci">ChenSampleGenerator(const DiscreteDistribution &amp;distribution, size_t windows)</div><div class="ttdef"><b>Definition:</b> chensamplegenerator.cpp:4</div></div>
 <div class="ttc" id="aclass_chen_sample_generator_html_afe98600bdb43405891779faf839c0a18"><div class="ttname"><a href="class_chen_sample_generator.html#afe98600bdb43405891779faf839c0a18">ChenSampleGenerator::generate</a></div><div class="ttdeci">Sample generate(size_t size) override</div><div class="ttdoc">Generates sample of given size.</div><div class="ttdef"><b>Definition:</b> chensamplegenerator.cpp:11</div></div>
 <div class="ttc" id="aclass_discrete_distribution_html"><div class="ttname"><a href="class_discrete_distribution.html">DiscreteDistribution</a></div><div class="ttdoc">The DiscreteDistribution class represents a generic discrete distribution, as per the provided in its...</div><div class="ttdef"><b>Definition:</b> discretedistribution.h:15</div></div>
-<div class="ttc" id="aclass_sample_generator_html"><div class="ttname"><a href="class_sample_generator.html">SampleGenerator</a></div><div class="ttdoc">The SampleGenerator class provides a common ground for several sample generators, using different mat...</div><div class="ttdef"><b>Definition:</b> samplegenerator.h:13</div></div>
+<div class="ttc" id="aclass_sample_generator_html"><div class="ttname"><a href="class_sample_generator.html">SampleGenerator</a></div><div class="ttdoc">The SampleGenerator class provides a common ground for several sample generators, using different mat...</div><div class="ttdef"><b>Definition:</b> samplegenerator.h:12</div></div>
 <div class="ttc" id="aclass_sample_html"><div class="ttname"><a href="class_sample.html">Sample</a></div><div class="ttdoc">The Sample class represents raw results of sampling, being unordered and without any grouping.</div><div class="ttdef"><b>Definition:</b> sample.h:12</div></div>
 <div class="ttc" id="adiscretedistribution_8h_html"><div class="ttname"><a href="discretedistribution_8h.html">discretedistribution.h</a></div></div>
 <div class="ttc" id="asamplegenerator_8h_html"><div class="ttname"><a href="samplegenerator_8h.html">samplegenerator.h</a></div></div>

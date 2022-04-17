@@ -23,7 +23,7 @@
   <td id="projectalign">
    <div id="projectname">Todennakoisyys<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">Yet another mostly useless program to model arbitrary discrete distributions</div>
+   <div id="projectbrief">Yet another mostly useless program to simulate arbitrary discrete distributions</div>
   </td>
  </tr>
  </tbody>
@@ -75,23 +75,20 @@ $(function() {
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="class_grouped_sample.html">   11</a></span><span class="keyword">class </span><a class="code hl_class" href="class_grouped_sample.html">GroupedSample</a></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_grouped_sample.html#a6617db485d4ed28f0441c86efb94ff6d">   14</a></span>    <span class="keyword">static</span> <span class="keyword">const</span> <a class="code hl_class" href="class_grouped_sample.html">GroupedSample</a> <a class="code hl_variable" href="class_grouped_sample.html#a6617db485d4ed28f0441c86efb94ff6d">EMPTY</a>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <a class="code hl_function" href="class_grouped_sample.html#a44b6360505bc781aec2e05bb6ea3f290">GroupedSample</a>(std::vector&lt;GroupedPoint&gt; <a class="code hl_function" href="class_grouped_sample.html#a08101054528df4d8f304a937ecef55e2">values</a>);</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_function" href="class_grouped_sample.html#a44b6360505bc781aec2e05bb6ea3f290">GroupedSample</a>(std::vector&lt;GroupedPoint&gt; <a class="code hl_function" href="class_grouped_sample.html#a08101054528df4d8f304a937ecef55e2">values</a>);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">const</span> std::vector&lt;GroupedPoint&gt;&amp; <a class="code hl_function" href="class_grouped_sample.html#a08101054528df4d8f304a937ecef55e2">values</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">size_t</span> <a class="code hl_function" href="class_grouped_sample.html#a504959bec3159e74f2dd70285295db88">count</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    std::vector&lt;GroupedPoint&gt; m_values;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">size_t</span> m_count;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>};</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif </span><span class="comment">// GROUPEDSAMPLE_H</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">const</span> std::vector&lt;GroupedPoint&gt;&amp; <a class="code hl_function" href="class_grouped_sample.html#a08101054528df4d8f304a937ecef55e2">values</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">size_t</span> <a class="code hl_function" href="class_grouped_sample.html#a504959bec3159e74f2dd70285295db88">count</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    std::vector&lt;GroupedPoint&gt; m_values;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">size_t</span> m_count;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>};</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#endif </span><span class="comment">// GROUPEDSAMPLE_H</span></div>
 <div class="ttc" id="aclass_grouped_sample_html"><div class="ttname"><a href="class_grouped_sample.html">GroupedSample</a></div><div class="ttdoc">The GroupedSample class stores sampling results in a grouped-by-value manner.</div><div class="ttdef"><b>Definition:</b> groupedsample.h:12</div></div>
-<div class="ttc" id="aclass_grouped_sample_html_a08101054528df4d8f304a937ecef55e2"><div class="ttname"><a href="class_grouped_sample.html#a08101054528df4d8f304a937ecef55e2">GroupedSample::values</a></div><div class="ttdeci">const std::vector&lt; GroupedPoint &gt; &amp; values() const</div><div class="ttdef"><b>Definition:</b> groupedsample.cpp:14</div></div>
-<div class="ttc" id="aclass_grouped_sample_html_a44b6360505bc781aec2e05bb6ea3f290"><div class="ttname"><a href="class_grouped_sample.html#a44b6360505bc781aec2e05bb6ea3f290">GroupedSample::GroupedSample</a></div><div class="ttdeci">GroupedSample(std::vector&lt; GroupedPoint &gt; values)</div><div class="ttdef"><b>Definition:</b> groupedsample.cpp:5</div></div>
-<div class="ttc" id="aclass_grouped_sample_html_a504959bec3159e74f2dd70285295db88"><div class="ttname"><a href="class_grouped_sample.html#a504959bec3159e74f2dd70285295db88">GroupedSample::count</a></div><div class="ttdeci">size_t count() const</div><div class="ttdef"><b>Definition:</b> groupedsample.cpp:19</div></div>
-<div class="ttc" id="aclass_grouped_sample_html_a6617db485d4ed28f0441c86efb94ff6d"><div class="ttname"><a href="class_grouped_sample.html#a6617db485d4ed28f0441c86efb94ff6d">GroupedSample::EMPTY</a></div><div class="ttdeci">static const GroupedSample EMPTY</div><div class="ttdef"><b>Definition:</b> groupedsample.h:14</div></div>
+<div class="ttc" id="aclass_grouped_sample_html_a08101054528df4d8f304a937ecef55e2"><div class="ttname"><a href="class_grouped_sample.html#a08101054528df4d8f304a937ecef55e2">GroupedSample::values</a></div><div class="ttdeci">const std::vector&lt; GroupedPoint &gt; &amp; values() const</div><div class="ttdef"><b>Definition:</b> groupedsample.cpp:12</div></div>
+<div class="ttc" id="aclass_grouped_sample_html_a44b6360505bc781aec2e05bb6ea3f290"><div class="ttname"><a href="class_grouped_sample.html#a44b6360505bc781aec2e05bb6ea3f290">GroupedSample::GroupedSample</a></div><div class="ttdeci">GroupedSample(std::vector&lt; GroupedPoint &gt; values)</div><div class="ttdef"><b>Definition:</b> groupedsample.cpp:3</div></div>
+<div class="ttc" id="aclass_grouped_sample_html_a504959bec3159e74f2dd70285295db88"><div class="ttname"><a href="class_grouped_sample.html#a504959bec3159e74f2dd70285295db88">GroupedSample::count</a></div><div class="ttdeci">size_t count() const</div><div class="ttdef"><b>Definition:</b> groupedsample.cpp:17</div></div>
 <div class="ttc" id="agroupedpoint_8h_html"><div class="ttname"><a href="groupedpoint_8h.html">groupedpoint.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

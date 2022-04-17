@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main.cpp']]],
-  ['mainwindow_1',['MainWindow',['../class_main_window.html#a996c5a2b6f77944776856f08ec30858d',1,'MainWindow']]]
+  ['operator_5b_5d_0',['operator[]',['../class_discrete_distribution.html#ad7ed765aa4453d4bcd41ac8641b48251',1,'DiscreteDistribution::operator[]()'],['../class_distribution.html#ad58508345cf34ca0168fb36ac1bbfa69',1,'Distribution::operator[]()'],['../class_grouped_discrete_distribution.html#ab12e2a74b5530fd5e1314409eaae1bdb',1,'GroupedDiscreteDistribution::operator[]()']]]
 ];

@@ -23,7 +23,7 @@
   <td id="projectalign">
    <div id="projectname">Todennakoisyys<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">Yet another mostly useless program to model arbitrary discrete distributions</div>
+   <div id="projectbrief">Yet another mostly useless program to simulate arbitrary discrete distributions</div>
   </td>
  </tr>
  </tbody>
@@ -72,16 +72,15 @@ $(function() {
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="distribution_8h.html">distribution.h</a>&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="sample_8h.html">sample.h</a>&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> TDistribution&gt;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_sample_generator.html">   12</a></span><span class="keyword">class </span><a class="code hl_class" href="class_sample_generator.html">SampleGenerator</a></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="class_sample_generator.html#a15a0dbd2f4fbacb4c8b3f5442f99d224">   15</a></span>    <span class="keyword">virtual</span> <a class="code hl_class" href="class_sample.html">Sample</a> <a class="code hl_function" href="class_sample_generator.html#a15a0dbd2f4fbacb4c8b3f5442f99d224">generate</a>(<span class="keywordtype">size_t</span> size) = 0;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>};</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#endif </span><span class="comment">// SAMPLEGENERATOR_H</span></div>
-<div class="ttc" id="aclass_sample_generator_html"><div class="ttname"><a href="class_sample_generator.html">SampleGenerator</a></div><div class="ttdoc">The SampleGenerator class provides a common ground for several sample generators, using different mat...</div><div class="ttdef"><b>Definition:</b> samplegenerator.h:13</div></div>
-<div class="ttc" id="aclass_sample_generator_html_a15a0dbd2f4fbacb4c8b3f5442f99d224"><div class="ttname"><a href="class_sample_generator.html#a15a0dbd2f4fbacb4c8b3f5442f99d224">SampleGenerator::generate</a></div><div class="ttdeci">virtual Sample generate(size_t size)=0</div></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="class_sample_generator.html">   11</a></span><span class="keyword">class </span><a class="code hl_class" href="class_sample_generator.html">SampleGenerator</a></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_sample_generator.html#aac2c970b18ec929f89462810a1cf81cf">   14</a></span>    <span class="keyword">virtual</span> <a class="code hl_class" href="class_sample.html">Sample</a> <a class="code hl_function" href="class_sample_generator.html#aac2c970b18ec929f89462810a1cf81cf">generate</a>(<span class="keywordtype">size_t</span> size) = 0;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>};</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#endif </span><span class="comment">// SAMPLEGENERATOR_H</span></div>
+<div class="ttc" id="aclass_sample_generator_html"><div class="ttname"><a href="class_sample_generator.html">SampleGenerator</a></div><div class="ttdoc">The SampleGenerator class provides a common ground for several sample generators, using different mat...</div><div class="ttdef"><b>Definition:</b> samplegenerator.h:12</div></div>
+<div class="ttc" id="aclass_sample_generator_html_aac2c970b18ec929f89462810a1cf81cf"><div class="ttname"><a href="class_sample_generator.html#aac2c970b18ec929f89462810a1cf81cf">SampleGenerator::generate</a></div><div class="ttdeci">virtual Sample generate(size_t size)=0</div></div>
 <div class="ttc" id="aclass_sample_html"><div class="ttname"><a href="class_sample.html">Sample</a></div><div class="ttdoc">The Sample class represents raw results of sampling, being unordered and without any grouping.</div><div class="ttdef"><b>Definition:</b> sample.h:12</div></div>
 <div class="ttc" id="adistribution_8h_html"><div class="ttname"><a href="distribution_8h.html">distribution.h</a></div></div>
 <div class="ttc" id="asample_8h_html"><div class="ttname"><a href="sample_8h.html">sample.h</a></div></div>

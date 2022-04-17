@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Todennakoisyys: SampleGenerator&lt; TDistribution &gt; Class Template Reference</title>
+<title>Todennakoisyys: SampleGenerator Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
   <td id="projectalign">
    <div id="projectname">Todennakoisyys<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">Yet another mostly useless program to model arbitrary discrete distributions</div>
+   <div id="projectbrief">Yet another mostly useless program to simulate arbitrary discrete distributions</div>
   </td>
  </tr>
  </tbody>
@@ -66,7 +66,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_sample_generator-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">SampleGenerator&lt; TDistribution &gt; Class Template Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+  <div class="headertitle"><div class="title">SampleGenerator Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -74,29 +74,36 @@ $(function() {
  <a href="class_sample_generator.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="samplegenerator_8h_source.html">samplegenerator.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for SampleGenerator:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_sample_generator.png" usemap="#SampleGenerator_map" alt=""/>
+  <map id="SampleGenerator_map" name="SampleGenerator_map">
+<area href="class_chen_sample_generator.html" title="The ChenSampleGenerator class generates sample using Chen&#39;s method." alt="ChenSampleGenerator" shape="rect" coords="0,56,141,80"/>
+<area href="class_table_sample_generator.html" title="The TableSampleGenerator class performs simulating a distribution using the simplest table method." alt="TableSampleGenerator" shape="rect" coords="151,56,292,80"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a15a0dbd2f4fbacb4c8b3f5442f99d224"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_sample.html">Sample</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample_generator.html#a15a0dbd2f4fbacb4c8b3f5442f99d224">generate</a> (size_t size)=0</td></tr>
-<tr class="separator:a15a0dbd2f4fbacb4c8b3f5442f99d224"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac2c970b18ec929f89462810a1cf81cf"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_sample.html">Sample</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sample_generator.html#aac2c970b18ec929f89462810a1cf81cf">generate</a> (size_t size)=0</td></tr>
+<tr class="separator:aac2c970b18ec929f89462810a1cf81cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename TDistribution&gt;<br />
-class SampleGenerator&lt; TDistribution &gt;</div><p >The <a class="el" href="class_sample_generator.html" title="The SampleGenerator class provides a common ground for several sample generators, using different mat...">SampleGenerator</a> class provides a common ground for several sample generators, using different mathematical methods. </p>
+<div class="textblock"><p >The <a class="el" href="class_sample_generator.html" title="The SampleGenerator class provides a common ground for several sample generators, using different mat...">SampleGenerator</a> class provides a common ground for several sample generators, using different mathematical methods. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a15a0dbd2f4fbacb4c8b3f5442f99d224" name="a15a0dbd2f4fbacb4c8b3f5442f99d224"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a15a0dbd2f4fbacb4c8b3f5442f99d224">&#9670;&nbsp;</a></span>generate()</h2>
+<a id="aac2c970b18ec929f89462810a1cf81cf" name="aac2c970b18ec929f89462810a1cf81cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac2c970b18ec929f89462810a1cf81cf">&#9670;&nbsp;</a></span>generate()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename TDistribution &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="class_sample.html">Sample</a> <a class="el" href="class_sample_generator.html">SampleGenerator</a>&lt; TDistribution &gt;::generate </td>
+          <td class="memname">virtual <a class="el" href="class_sample.html">Sample</a> SampleGenerator::generate </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>size</em></td><td>)</td>

@@ -1,7 +1,5 @@
 #include "groupedsample.h"
 
-const GroupedSample GroupedSample::EMPTY = GroupedSample(std::vector<GroupedPoint>());
-
 GroupedSample::GroupedSample(std::vector<GroupedPoint> values)
     : m_values(values)
     , m_count(0)

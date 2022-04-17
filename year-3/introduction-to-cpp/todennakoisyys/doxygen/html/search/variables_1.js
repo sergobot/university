@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ui_0',['ui',['../class_settings_dialog.html#aef76017ec1056d6e88e6bb48cdf73b0f',1,'SettingsDialog']]]
+  ['values_0',['values',['../class_sample.html#a6cbb2810fee2cee361e75dc24f26f4dc',1,'Sample']]]
 ];

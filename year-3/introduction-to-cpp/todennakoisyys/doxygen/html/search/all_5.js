@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['operator_5b_5d_0',['operator[]',['../class_discrete_distribution.html#ad7ed765aa4453d4bcd41ac8641b48251',1,'DiscreteDistribution::operator[]()'],['../class_distribution.html#ad58508345cf34ca0168fb36ac1bbfa69',1,'Distribution::operator[]()'],['../class_grouped_discrete_distribution.html#ab12e2a74b5530fd5e1314409eaae1bdb',1,'GroupedDiscreteDistribution::operator[]()']]]
+  ['point_0',['Point',['../class_point.html',1,'Point'],['../class_point.html#ab7b645aacc6f5e755aa424a56cbb9957',1,'Point::Point()']]],
+  ['point_2ecpp_1',['point.cpp',['../point_8cpp.html',1,'']]],
+  ['point_2eh_2',['point.h',['../point_8h.html',1,'']]],
+  ['probability_3',['probability',['../class_point.html#a42fdf076f2211f0ecb54a3ab9893b2bb',1,'Point']]],
+  ['pvalue_4',['pValue',['../class_chi_square_criterion.html#ab09cde82527d7fe1f7a35213f26c9a14',1,'ChiSquareCriterion']]]
 ];

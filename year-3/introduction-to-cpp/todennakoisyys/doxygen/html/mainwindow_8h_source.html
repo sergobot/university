@@ -23,7 +23,7 @@
   <td id="projectalign">
    <div id="projectname">Todennakoisyys<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">Yet another mostly useless program to model arbitrary discrete distributions</div>
+   <div id="projectbrief">Yet another mostly useless program to simulate arbitrary discrete distributions</div>
   </td>
  </tr>
  </tbody>
@@ -103,25 +103,28 @@ $(function() {
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">void</span> createActions();</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">void</span> recreateDistributionAndGenerators(std::vector&lt;GroupedPoint&gt; newPoints);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">private</span> slots:</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">void</span> promptUserForParameters();</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">void</span> generateAndPlotHistogram();</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">void</span> calculateAndPlotPLevels();</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">void</span> performAndPlotPerformanceTest();</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">void</span> showAuthors();</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">void</span> openHelpLinkInWebBrowser();</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>};</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#endif </span><span class="comment">// MAINWINDOW_H</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <a class="code hl_class" href="class_sample_generator.html">SampleGenerator</a>&amp; generator();</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    QString generatorDescription() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">private</span> slots:</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">void</span> promptUserForParameters();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">void</span> generateAndPlotHistogram();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">void</span> calculateAndPlotPLevels();</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">void</span> performAndPlotPerformanceTest();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">void</span> showAuthors();</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> openHelpLinkInWebBrowser();</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>};</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#endif </span><span class="comment">// MAINWINDOW_H</span></div>
 <div class="ttc" id="achensamplegenerator_8h_html"><div class="ttname"><a href="chensamplegenerator_8h.html">chensamplegenerator.h</a></div></div>
 <div class="ttc" id="aclass_chen_sample_generator_html"><div class="ttname"><a href="class_chen_sample_generator.html">ChenSampleGenerator</a></div><div class="ttdoc">The ChenSampleGenerator class generates sample using Chen's method.</div><div class="ttdef"><b>Definition:</b> chensamplegenerator.h:11</div></div>
 <div class="ttc" id="aclass_grouped_discrete_distribution_html"><div class="ttname"><a href="class_grouped_discrete_distribution.html">GroupedDiscreteDistribution</a></div><div class="ttdoc">The GroupedDiscreteDistribution class represents a discrete distribution, specified with the provided...</div><div class="ttdef"><b>Definition:</b> groupeddiscretedistribution.h:15</div></div>
 <div class="ttc" id="aclass_main_window_html"><div class="ttname"><a href="class_main_window.html">MainWindow</a></div><div class="ttdef"><b>Definition:</b> mainwindow.h:17</div></div>
-<div class="ttc" id="aclass_main_window_html_a996c5a2b6f77944776856f08ec30858d"><div class="ttname"><a href="class_main_window.html#a996c5a2b6f77944776856f08ec30858d">MainWindow::MainWindow</a></div><div class="ttdeci">MainWindow(QWidget *parent=nullptr)</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:22</div></div>
-<div class="ttc" id="aclass_main_window_html_ae98d00a93bc118200eeef9f9bba1dba7"><div class="ttname"><a href="class_main_window.html#ae98d00a93bc118200eeef9f9bba1dba7">MainWindow::~MainWindow</a></div><div class="ttdeci">~MainWindow()</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:39</div></div>
+<div class="ttc" id="aclass_main_window_html_a996c5a2b6f77944776856f08ec30858d"><div class="ttname"><a href="class_main_window.html#a996c5a2b6f77944776856f08ec30858d">MainWindow::MainWindow</a></div><div class="ttdeci">MainWindow(QWidget *parent=nullptr)</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:21</div></div>
+<div class="ttc" id="aclass_main_window_html_ae98d00a93bc118200eeef9f9bba1dba7"><div class="ttname"><a href="class_main_window.html#ae98d00a93bc118200eeef9f9bba1dba7">MainWindow::~MainWindow</a></div><div class="ttdeci">~MainWindow()</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:38</div></div>
+<div class="ttc" id="aclass_sample_generator_html"><div class="ttname"><a href="class_sample_generator.html">SampleGenerator</a></div><div class="ttdoc">The SampleGenerator class provides a common ground for several sample generators, using different mat...</div><div class="ttdef"><b>Definition:</b> samplegenerator.h:12</div></div>
 <div class="ttc" id="aclass_table_sample_generator_html"><div class="ttname"><a href="class_table_sample_generator.html">TableSampleGenerator</a></div><div class="ttdoc">The TableSampleGenerator class performs simulating a distribution using the simplest table method.</div><div class="ttdef"><b>Definition:</b> tablesamplegenerator.h:12</div></div>
 <div class="ttc" id="agroupeddiscretedistribution_8h_html"><div class="ttname"><a href="groupeddiscretedistribution_8h.html">groupeddiscretedistribution.h</a></div></div>
 <div class="ttc" id="anamespace_ui_html"><div class="ttname"><a href="namespace_ui.html">Ui</a></div><div class="ttdef"><b>Definition:</b> mainwindow.h:12</div></div>

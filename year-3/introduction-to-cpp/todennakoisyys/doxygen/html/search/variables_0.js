@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['empty_0',['EMPTY',['../class_grouped_sample.html#a6617db485d4ed28f0441c86efb94ff6d',1,'GroupedSample']]]
+  ['ui_0',['ui',['../class_settings_dialog.html#aef76017ec1056d6e88e6bb48cdf73b0f',1,'SettingsDialog']]]
 ];

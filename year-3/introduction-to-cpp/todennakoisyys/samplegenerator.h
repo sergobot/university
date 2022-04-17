@@ -8,7 +8,6 @@
  * @brief The SampleGenerator class provides a common ground for several sample generators,
  * using different mathematical methods.
  */
-template<typename TDistribution>
 class SampleGenerator
 {
 public:

@@ -9,7 +9,6 @@
 #include <QHBoxLayout>
 #include <QMessageBox>
 #include <QDesktopServices>
-#include <QBarSet>
 #include <QtCharts>
 
 #include "discretedistribution.h"
@@ -26,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     , m_tableSampleGenerator(DEFAULT_TABLE_SAMPLE_GENERATOR)
     , m_chenSampleGenerator(DEFAULT_CHEN_SAMPLE_GENERATOR)
     , m_sampleSize(1000)
-    , m_alpha(0.95)
+    , m_alpha(0.05)
     , m_generatorIndex(0)
     , m_chenWindows(3)
 {
@@ -196,18 +195,8 @@ void MainWindow::recreateDistributionAndGenerators(std::vector<GroupedPoint> new
 
 void MainWindow::generateAndPlotHistogram()
 {
-    GroupedSample gSamp = GroupedSample::EMPTY;
-    QString generatorUsed;
-    if (m_generatorIndex == 0)
-    {
-        gSamp = m_tableSampleGenerator.generate(m_sampleSize).group();
-        generatorUsed = "Table";
-    }
-    else if (m_generatorIndex == 1)
-    {
-        gSamp = m_chenSampleGenerator.generate(m_sampleSize).group();
-        generatorUsed = "Chen";
-    }
+    SampleGenerator &gen = generator();
+    GroupedSample gSamp = gen.generate(m_sampleSize).group();
 
     DiscreteDistribution discreteDistribution = m_distribution.ungroup();
     ChiSquareCriterion chisq(discreteDistribution, gSamp);
@@ -219,9 +208,10 @@ void MainWindow::generateAndPlotHistogram()
 
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
     axisX->append(categories);
+    axisX->setTitleText("Value");
     QValueAxis *axisY = new QValueAxis();
     axisY->setMinorGridLineVisible(true);
-    //    axisY->setRange(0, 1);
+    axisY->setTitleText("Frequencies");
 
     QBarSet *theoretical = new QBarSet("Theoretical");
     QBarSet *empirical = new QBarSet("Empirical");
@@ -238,7 +228,7 @@ void MainWindow::generateAndPlotHistogram()
 
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("Comparing theoretical and empirical distributions");
+    chart->setTitle("Comparing theoretical and empirical distributions, \nusing " + generatorDescription());
     chart->setAnimationOptions(QChart::SeriesAnimations);
     chart->addAxis(axisX, Qt::AlignBottom);
     chart->addAxis(axisY, Qt::AlignLeft);
@@ -254,27 +244,53 @@ void MainWindow::generateAndPlotHistogram()
 
 void MainWindow::calculateAndPlotPLevels()
 {
-    std::vector<size_t> sampleSizes = {10, 100, 1000, 10000};
+    std::vector<size_t> sampleSizes = {10, 100, 1000, 10000, 100000};
     std::vector<double> pValueShares;
-
     DiscreteDistribution discreteDistribution = m_distribution.ungroup();
 
+    QStringList categories;
+    QLineSeries *pValues = new QLineSeries();
     for (const size_t& size : sampleSizes)
     {
+        categories << QString::number(size);
+
         size_t pValuesOverLimit = 0;
         for (size_t i = 0; i < P_VALUE_COUNTS; ++i)
         {
-            GroupedSample sample = m_chenSampleGenerator.generate(size).group();
+            GroupedSample sample = m_tableSampleGenerator.generate(size).group();
             ChiSquareCriterion chisq(discreteDistribution, sample);
 
-            double pVal = chisq.degrees();
+            double pVal = chisq.pValue();
             if (pVal > m_alpha)
                 ++pValuesOverLimit;
         }
-        pValueShares.push_back(pValuesOverLimit / (double)P_VALUE_COUNTS);
+        double share = pValuesOverLimit / (double)P_VALUE_COUNTS;
+        pValueShares.push_back(share);
+        pValues->append(QPointF(size, share));
     }
 
-    std::cout << "done" << std::endl;
+    QLogValueAxis *axisX = new QLogValueAxis();
+    axisX->setLabelFormat("%g");
+    axisX->setBase(10.0);
+    axisX->setTitleText("Sample size");
+    QValueAxis *axisY = new QValueAxis();
+    axisY->setMinorGridLineVisible(true);
+    axisY->setTitleText("True significance level");
+
+    QChart *chart = new QChart();
+    chart->addSeries(pValues);
+    chart->setTitle("Relationship between sample size and true significance level, using " + generatorDescription() +
+                    "\n and formal significance level " + QString::number(m_alpha));
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+    chart->addAxis(axisX, Qt::AlignBottom);
+    chart->addAxis(axisY, Qt::AlignLeft);
+    pValues->attachAxis(axisX);
+    pValues->attachAxis(axisY);
+
+    chart->legend()->setVisible(true);
+    chart->legend()->setAlignment(Qt::AlignBottom);
+
+    ui->graphicsView->setChart(chart);
 }
 
 void MainWindow::performAndPlotPerformanceTest()
@@ -307,11 +323,13 @@ void MainWindow::performAndPlotPerformanceTest()
 
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
     axisX->append(categories);
+    axisX->setTitleText("Sample size");
 
     QLogValueAxis *axisY = new QLogValueAxis();
     axisY->setMinorGridLineVisible(true);
     axisY->setLabelFormat("%g");
     axisY->setBase(10.0);
+    axisY->setTitleText("Time in ms");
 
     QBarSeries *series = new QBarSeries();
     series->append(tableTimes);
@@ -353,5 +371,24 @@ void MainWindow::openHelpLinkInWebBrowser()
     {
         QDesktopServices::openUrl(QUrl("https://sergobot.com/todennakoisyys"));
     }
+}
+
+SampleGenerator& MainWindow::generator()
+{
+    if (m_generatorIndex == 0)
+    {
+        return m_tableSampleGenerator;
+    }
+    return m_chenSampleGenerator;
+}
+
+QString MainWindow::generatorDescription() const
+{
+    if (m_generatorIndex == 0)
+    {
+        return "Table method";
+    }
+    else
+        return "Chen method with " + QString::number(m_chenWindows) + " windows";
 }
 

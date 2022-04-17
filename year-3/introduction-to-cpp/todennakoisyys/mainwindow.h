@@ -35,6 +35,8 @@ private:
 
     void createActions();
     void recreateDistributionAndGenerators(std::vector<GroupedPoint> newPoints);
+    SampleGenerator& generator();
+    QString generatorDescription() const;
 
 private slots:
     void promptUserForParameters();

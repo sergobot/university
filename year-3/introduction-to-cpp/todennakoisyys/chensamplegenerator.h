@@ -7,7 +7,7 @@
 /**
  * @brief The ChenSampleGenerator class generates sample using Chen's method.
  */
-class ChenSampleGenerator : public SampleGenerator<DiscreteDistribution>
+class ChenSampleGenerator : public SampleGenerator
 {
 public:
     ChenSampleGenerator(const DiscreteDistribution& distribution, size_t windows);

@@ -23,7 +23,7 @@
   <td id="projectalign">
    <div id="projectname">Todennakoisyys<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">Yet another mostly useless program to model arbitrary discrete distributions</div>
+   <div id="projectbrief">Yet another mostly useless program to simulate arbitrary discrete distributions</div>
   </td>
  </tr>
  </tbody>
@@ -75,22 +75,19 @@ $(function() {
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="class_sample.html">   11</a></span><span class="keyword">class </span><a class="code hl_class" href="class_sample.html">Sample</a></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_sample.html#aee1788a5a21a9a6ccfbc2c45af547cad">   14</a></span>    <span class="keyword">static</span> <span class="keyword">const</span> <a class="code hl_class" href="class_sample.html">Sample</a> <a class="code hl_function" href="class_sample.html#aee1788a5a21a9a6ccfbc2c45af547cad">EMPTY</a>(std::vector&lt;double&gt;());</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <a class="code hl_function" href="class_sample.html#a7aba00cd2094dafc107b09b7f1e87768">Sample</a>(std::vector&lt;double&gt; <a class="code hl_variable" href="class_sample.html#a6cbb2810fee2cee361e75dc24f26f4dc">values</a>);</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_function" href="class_sample.html#a7aba00cd2094dafc107b09b7f1e87768">Sample</a>(std::vector&lt;double&gt; <a class="code hl_variable" href="class_sample.html#a6cbb2810fee2cee361e75dc24f26f4dc">values</a>);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_class" href="class_grouped_sample.html">GroupedSample</a> <a class="code hl_function" href="class_sample.html#ab1f62731e7b2ed7445dd02601d8a0cc5">group</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="class_sample.html#a6cbb2810fee2cee361e75dc24f26f4dc">   24</a></span>    <span class="keyword">const</span> std::vector&lt;double&gt; <a class="code hl_variable" href="class_sample.html#a6cbb2810fee2cee361e75dc24f26f4dc">values</a>;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>};</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#endif </span><span class="comment">// SAMPLE_H</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_class" href="class_grouped_sample.html">GroupedSample</a> <a class="code hl_function" href="class_sample.html#ab1f62731e7b2ed7445dd02601d8a0cc5">group</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="class_sample.html#a6cbb2810fee2cee361e75dc24f26f4dc">   22</a></span>    <span class="keyword">const</span> std::vector&lt;double&gt; <a class="code hl_variable" href="class_sample.html#a6cbb2810fee2cee361e75dc24f26f4dc">values</a>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>};</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif </span><span class="comment">// SAMPLE_H</span></div>
 <div class="ttc" id="aclass_grouped_sample_html"><div class="ttname"><a href="class_grouped_sample.html">GroupedSample</a></div><div class="ttdoc">The GroupedSample class stores sampling results in a grouped-by-value manner.</div><div class="ttdef"><b>Definition:</b> groupedsample.h:12</div></div>
 <div class="ttc" id="aclass_sample_html"><div class="ttname"><a href="class_sample.html">Sample</a></div><div class="ttdoc">The Sample class represents raw results of sampling, being unordered and without any grouping.</div><div class="ttdef"><b>Definition:</b> sample.h:12</div></div>
-<div class="ttc" id="aclass_sample_html_a6cbb2810fee2cee361e75dc24f26f4dc"><div class="ttname"><a href="class_sample.html#a6cbb2810fee2cee361e75dc24f26f4dc">Sample::values</a></div><div class="ttdeci">const std::vector&lt; double &gt; values</div><div class="ttdef"><b>Definition:</b> sample.h:24</div></div>
+<div class="ttc" id="aclass_sample_html_a6cbb2810fee2cee361e75dc24f26f4dc"><div class="ttname"><a href="class_sample.html#a6cbb2810fee2cee361e75dc24f26f4dc">Sample::values</a></div><div class="ttdeci">const std::vector&lt; double &gt; values</div><div class="ttdef"><b>Definition:</b> sample.h:22</div></div>
 <div class="ttc" id="aclass_sample_html_a7aba00cd2094dafc107b09b7f1e87768"><div class="ttname"><a href="class_sample.html#a7aba00cd2094dafc107b09b7f1e87768">Sample::Sample</a></div><div class="ttdeci">Sample(std::vector&lt; double &gt; values)</div><div class="ttdef"><b>Definition:</b> sample.cpp:6</div></div>
 <div class="ttc" id="aclass_sample_html_ab1f62731e7b2ed7445dd02601d8a0cc5"><div class="ttname"><a href="class_sample.html#ab1f62731e7b2ed7445dd02601d8a0cc5">Sample::group</a></div><div class="ttdeci">GroupedSample group() const</div><div class="ttdoc">group converts Sample to GroupedSample, grouping and ordering by value.</div><div class="ttdef"><b>Definition:</b> sample.cpp:11</div></div>
-<div class="ttc" id="aclass_sample_html_aee1788a5a21a9a6ccfbc2c45af547cad"><div class="ttname"><a href="class_sample.html#aee1788a5a21a9a6ccfbc2c45af547cad">Sample::EMPTY</a></div><div class="ttdeci">static const Sample EMPTY(std::vector&lt; double &gt;())</div></div>
 <div class="ttc" id="agroupedsample_8h_html"><div class="ttname"><a href="groupedsample_8h.html">groupedsample.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

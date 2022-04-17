@@ -11,8 +11,6 @@
 class GroupedSample
 {
 public:
-    static const GroupedSample EMPTY;
-
     GroupedSample(std::vector<GroupedPoint> values);
 
     const std::vector<GroupedPoint>& values() const;
