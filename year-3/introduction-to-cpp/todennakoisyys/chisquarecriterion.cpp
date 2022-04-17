@@ -15,15 +15,20 @@ ChiSquareCriterion::ChiSquareCriterion(const DiscreteDistribution &distr, const 
         m_theoretical.at(i) = Point(distr[i].value(), distr[i].probability() * sample.count());
 
     m_empirical.resize(m_states);
-    for (size_t i = 0, j = 0; i < m_states; ++i, ++j)
+
+    for (size_t i = 0, j = 0; i < m_states; ++i)
     {
-        while (i < m_states && distr[i].value() != sample.values().at(i).value())
+        if (j >= sample.values().size() || distr[i].value() != sample.values().at(j).value())
         {
             m_empirical.at(i) = GroupedPoint(distr[i].value(), 0);
-            ++i;
         }
-        m_empirical.at(i) = sample.values().at(j);
+        else
+        {
+            m_empirical.at(i) = sample.values().at(j);
+            ++j;
+        }
     }
+
     m_empirical_merged.resize(m_states);
     m_theoretical_merged.resize(m_states);
 }

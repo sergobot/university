@@ -125,7 +125,7 @@ void MainWindow::promptUserForParameters()
         dialog.ui->tableWidget->setItem(i, 0, value);
 
         QTableWidgetItem* count = new QTableWidgetItem();
-        count->setData(Qt::EditRole, point.count());
+        count->setData(Qt::EditRole, (int)point.count());
         dialog.ui->tableWidget->setItem(i, 1, count);
     }
     dialog.ui->tableWidget->sortItems(0);
