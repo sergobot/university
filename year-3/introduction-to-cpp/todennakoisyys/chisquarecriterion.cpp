@@ -17,13 +17,13 @@ ChiSquareCriterion::ChiSquareCriterion(const DiscreteDistribution &distr, const 
     m_empirical.resize(m_states);
     for (size_t i = 0, j = 0; i < m_states; ++i)
     {
-        if (j >= sample.values().size() || distr[i].value() != sample.values().at(j).value())
+        if (j >= sample.size() || distr[i].value() != sample[j].value())
         {
             m_empirical.at(i) = GroupedPoint(distr[i].value(), 0);
         }
         else
         {
-            m_empirical.at(i) = sample.values().at(j);
+            m_empirical.at(i) = sample[j];
             ++j;
         }
     }

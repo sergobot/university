@@ -218,8 +218,8 @@ void MainWindow::generateAndPlotHistogram()
 
     for (size_t i = 0; i < discreteDistribution.size(); ++i)
         theoretical->append(discreteDistribution[i].probability());
-    for (size_t i = 0; i < gSamp.values().size(); ++i)
-        empirical->append(gSamp.values()[i].count() / (double)gSamp.count());
+    for (size_t i = 0; i < gSamp.size(); ++i)
+        empirical->append(gSamp[i].count() / (double)gSamp.count());
 
 
     QBarSeries *series = new QBarSeries();

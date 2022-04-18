@@ -32,5 +32,5 @@ TableSampleGenerator::TableSampleGenerator(const GroupedDiscreteDistribution& di
         result[i] = temp[tau];
     }
 
-    return Sample(result);
+    return Sample(&result[0], size);
 }

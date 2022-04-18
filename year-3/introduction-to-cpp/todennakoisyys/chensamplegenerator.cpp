@@ -38,5 +38,5 @@ ChenSampleGenerator::ChenSampleGenerator(const DiscreteDistribution& distr, size
         result[i] = m_distribution[h].value();
     }
 
-    return Sample(result);
+    return Sample(&result[0], size);
 }

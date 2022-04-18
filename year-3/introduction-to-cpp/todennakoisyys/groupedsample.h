@@ -11,13 +11,30 @@
 class GroupedSample
 {
 public:
-    GroupedSample(std::vector<GroupedPoint> values);
+    GroupedSample(const GroupedPoint *const values, size_t size);
+    GroupedSample(const GroupedSample &other);
+    GroupedSample(GroupedSample &&other) noexcept;
 
-    const std::vector<GroupedPoint>& values() const;
+    ~GroupedSample();
+
+    GroupedSample& operator=(const GroupedSample &other);
+    GroupedSample& operator=(GroupedSample &&other) noexcept;
+
+    size_t size() const;
+    const GroupedPoint& operator[](size_t i) const;
     size_t count() const;
+
 private:
-    std::vector<GroupedPoint> m_values;
+    size_t m_size;
+    GroupedPoint *m_values;
     size_t m_count;
+
+    friend void swap(GroupedSample& lhs, GroupedSample& rhs) noexcept
+    {
+        std::swap(lhs.m_size, rhs.m_size);
+        std::swap(lhs.m_values, rhs.m_values);
+        std::swap(lhs.m_count, rhs.m_count);
+    }
 };
 
 #endif // GROUPEDSAMPLE_H
