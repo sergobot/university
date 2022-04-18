@@ -15,8 +15,10 @@ public:
     explicit SettingsDialog(QWidget *parent = nullptr);
     ~SettingsDialog();
 
-private:
     Ui::SettingsDialog *ui;
+private slots:
+    void on_clearButton_clicked();
+    void on_addButton_clicked();
 };
 
 #endif // SETTINGSDIALOG_H

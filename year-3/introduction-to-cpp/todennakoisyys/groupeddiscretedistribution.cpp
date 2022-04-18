@@ -1,44 +1,30 @@
-#include "distribution.h"
+#include "groupeddiscretedistribution.h"
 
-DiscreteDistribution::DiscreteDistribution(QVector<Point> points, QObject *parent)
-    : QObject(parent)
-    , points(points)
+GroupedDiscreteDistribution::GroupedDiscreteDistribution(std::vector<GroupedPoint> groupedPoints)
+    : points(groupedPoints)
 {
 
 }
 
-const Point& DiscreteDistribution::operator[](size_t i) const
-{
-    return points.at(i);
-}
-
-const QVector<double>& DiscreteDistribution::getCumProbs() const
-{
-    return cumprobs;
-}
-
-QVector<double> DiscreteDistribution::getTableForN(size_t n) const
-{
-    QVector<double> result(n);
-
-    double currentValue = points.at(0).value;
-    for (int i = 0; i < points.size(); ++i)
-    {
-
-    }
-}
-
-size_t DiscreteDistribution::size() const
+size_t GroupedDiscreteDistribution::size() const
 {
     return points.size();
 }
 
-void DiscreteDistribution::computeCumProbs()
+const GroupedPoint& GroupedDiscreteDistribution::operator[](size_t i) const
 {
-    cumprobs.clear();
-    cumprobs.reserve(points.size());
+    return points.at(i);
+}
 
-    double sum = 0;
-    for (int i = 0; i < points.size(); ++i)
-        cumprobs.append(sum += points.at(i).probability);
+DiscreteDistribution GroupedDiscreteDistribution::ungroup() const
+{
+    size_t sum = 0;
+    for (size_t i = 0; i < points.size(); ++i)
+        sum += points[i].count();
+
+    std::vector<Point> result(points.size());
+    for (size_t i = 0; i < points.size(); ++i)
+        result[i] = Point(points[i].value(), points[i].count() / (double)sum);
+
+    return DiscreteDistribution(result);
 }

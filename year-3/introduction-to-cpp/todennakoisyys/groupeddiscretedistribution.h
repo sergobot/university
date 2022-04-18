@@ -1,29 +1,33 @@
-#ifndef DISTRIBUTION_H
-#define DISTRIBUTION_H
+#ifndef GROUPED_DISCRETE_DISTRIBUTION_H
+#define GROUPED_DISCRETE_DISTRIBUTION_H
 
-#include <QObject>
-#include <QVector>
+#include <vector>
 
 #include "groupedpoint.h"
+#include "distribution.h"
+#include "discretedistribution.h"
 
-class DiscreteDistribution : public QObject
+/**
+ * @brief The GroupedDiscreteDistribution class represents a discrete distribution,
+ * specified with the provided in its constructor counts.
+ */
+class GroupedDiscreteDistribution : public Distribution<GroupedPoint>
 {
-    Q_OBJECT
 public:
-    explicit DiscreteDistribution(QVector<GroupedPoint> groupedPoints, QObject *parent = nullptr);
+    explicit GroupedDiscreteDistribution(std::vector<GroupedPoint> groupedPoints);
 
-    const GroupedPoint& operator[](size_t i) const;
-    const QVector<double>& getCumProbs() const;
-    const QVector<double>& getTable() const;
-    size_t size() const;
+    size_t size() const override;
+    const GroupedPoint& operator[](size_t i) const override;
 
-    void computeCumProbsIfNotYet();
-    void computeTableIfNotYet();
+    /**
+     * @brief ungroup converts grouped distribution to a normal one using division
+     * of separate counts by the total.
+     * @return a new DiscreteDistribution, identical to this.
+     */
+    DiscreteDistribution ungroup() const;
 
 private:
-    const QVector<GroupedPoint> points;
-    QVector<double> cumprobs;
-    QVector<double> table;
+    std::vector<GroupedPoint> points;
 };
 
-#endif // DISTRIBUTION_H
+#endif // GROUPED_DISCRETE_DISTRIBUTION_H
