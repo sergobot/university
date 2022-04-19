@@ -335,7 +335,7 @@ void MainWindow::generateAndPlotHistogram()
 
 void MainWindow::calculateAndPlotPLevels()
 {
-    std::vector<size_t> sampleSizes = {10, 15, 30, 50, 100};
+    std::vector<size_t> sampleSizes = {10, 15, 25, 50, 75, 100};
     std::vector<double> pValueShares;
     DiscreteDistribution discreteDistribution = m_distribution.ungroup();
 
@@ -371,10 +371,10 @@ void MainWindow::calculateAndPlotPLevels()
     pValuesPoints->setMarkerShape(QScatterSeries::MarkerShapeCircle);
     pValuesPoints->setMarkerSize(5.0);
 
-    QLogValueAxis *axisX = new QLogValueAxis();
+    QValueAxis *axisX = new QValueAxis();
     axisX->setLabelFormat("%g");
-    axisX->setBase(10.0);
     axisX->setTitleText("Sample size");
+    axisX->setTickInterval(5.0);
     QValueAxis *axisY = new QValueAxis();
     axisY->setMinorGridLineVisible(true);
     axisY->setTitleText("True significance level");
