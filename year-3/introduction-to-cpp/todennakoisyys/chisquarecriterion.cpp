@@ -36,6 +36,8 @@ long ChiSquareCriterion::degrees()
 {
     if (m_degrees < 0)
     {
+
+//        std::cout << "START\n";
         m_degrees = 0;
         for (size_t i = 0; i < m_states; ++i, ++m_degrees)
         {
@@ -55,6 +57,8 @@ long ChiSquareCriterion::degrees()
             }
             --i;           
         }
+//        std::cout << " " << m_degrees << std::endl;
+//        std::cout << "END" << std::endl;
     }
     return m_degrees;
 }
@@ -72,6 +76,7 @@ double ChiSquareCriterion::chiSquare()
             m_chiSquare += std::pow(m_empirical_merged[i] - m_theoretical_merged[i], 2) / m_theoretical_merged[i];
         }
     }
+
     return m_chiSquare;
 }
 

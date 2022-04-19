@@ -15,11 +15,11 @@
  */
 
 static const std::vector<GroupedPoint> DEFAULT_POINTS {
-                    GroupedPoint(1, 21),
-                    GroupedPoint(2, 50),
-                    GroupedPoint(3, 14),
+                    GroupedPoint(1, 5),
+                    GroupedPoint(2, 7),
+                    GroupedPoint(3, 80),
                     GroupedPoint(4, 3),
-                    GroupedPoint(5, 12)
+                    GroupedPoint(5, 5)
 };
 
 static const GroupedDiscreteDistribution DEFAULT_GROUPED_DISCRETE_DISTRIBUTION(DEFAULT_POINTS);
@@ -31,6 +31,6 @@ static const TableSampleGenerator DEFAULT_TABLE_SAMPLE_GENERATOR(DEFAULT_GROUPED
 
 static const ChenSampleGenerator DEFAULT_CHEN_SAMPLE_GENERATOR(DEFAULT_DISCRETE_DISTRIBUTION, 3);
 
-static const size_t P_VALUE_COUNTS = 100;
+static const size_t P_VALUE_COUNTS = 10000;
 
 #endif // DEFAULTS_H

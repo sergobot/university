@@ -24,6 +24,8 @@ public:
 private:
     Ui::MainWindow *ui;
 
+    GroupedDiscreteDistribution m_targetDistribution;
+
     GroupedDiscreteDistribution m_distribution;
     TableSampleGenerator m_tableSampleGenerator;
     ChenSampleGenerator m_chenSampleGenerator;
@@ -44,6 +46,7 @@ private slots:
     void generateAndPlotHistogram();
     void calculateAndPlotPLevels();
     void performAndPlotPerformanceTest();
+    void plotPValues();
 
     void showAuthors();
     void openHelpLinkInWebBrowser();

@@ -19,6 +19,8 @@ public:
 private slots:
     void on_clearButton_clicked();
     void on_addButton_clicked();
+    void on_addButton_2_clicked();
+    void on_clearButton_2_clicked();
 };
 
 #endif // SETTINGSDIALOG_H

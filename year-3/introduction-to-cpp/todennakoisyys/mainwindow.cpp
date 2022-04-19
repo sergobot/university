@@ -21,10 +21,11 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , m_targetDistribution(DEFAULT_GROUPED_DISCRETE_DISTRIBUTION)
     , m_distribution(DEFAULT_GROUPED_DISCRETE_DISTRIBUTION)
     , m_tableSampleGenerator(DEFAULT_TABLE_SAMPLE_GENERATOR)
     , m_chenSampleGenerator(DEFAULT_CHEN_SAMPLE_GENERATOR)
-    , m_sampleSize(1000)
+    , m_sampleSize(100)
     , m_alpha(0.05)
     , m_generatorIndex(0)
     , m_chenWindows(3)
@@ -81,6 +82,14 @@ void MainWindow::createActions()
     modelMenu->addAction(testPerformanceAct);
     modelToolBar->addAction(testPerformanceAct);
 
+    const QIcon plotPValuesIcon = QIcon::fromTheme("list-add");
+    QAction *plotPValuesAct = new QAction(plotPValuesIcon, tr("&Plot p-value distribution"), this);
+    plotPValuesAct->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_V));
+    plotPValuesAct->setStatusTip(tr("Plot p-values and compare it against target distribution"));
+    connect(plotPValuesAct, &QAction::triggered, this, &MainWindow::plotPValues);
+    modelMenu->addAction(plotPValuesAct);
+    modelToolBar->addAction(plotPValuesAct);
+
     modelMenu->addSeparator();
     modelToolBar->addSeparator();
 
@@ -128,6 +137,20 @@ void MainWindow::promptUserForParameters()
         dialog.ui->tableWidget->setItem(i, 1, count);
     }
     dialog.ui->tableWidget->sortItems(0);
+
+    dialog.ui->tableWidget_2->setRowCount(m_targetDistribution.size());
+    for (size_t i = 0; i < m_targetDistribution.size(); ++i)
+    {
+        GroupedPoint point = m_targetDistribution[i];
+        QTableWidgetItem* value = new QTableWidgetItem();
+        value->setData(Qt::EditRole, point.value());
+        dialog.ui->tableWidget_2->setItem(i, 0, value);
+
+        QTableWidgetItem* count = new QTableWidgetItem();
+        count->setData(Qt::EditRole, (int)point.count());
+        dialog.ui->tableWidget_2->setItem(i, 1, count);
+    }
+    dialog.ui->tableWidget_2->sortItems(0);
 
     int code = dialog.exec();
 
@@ -183,6 +206,39 @@ void MainWindow::promptUserForParameters()
             }
             recreateDistributionAndGenerators(newPoints);
         }
+
+        boolean theoUpdateRequired = false;
+        if (dialog.ui->tableWidget_2->rowCount() == m_targetDistribution.size())
+        {
+            for (size_t i = 0; i < dialog.ui->tableWidget_2->rowCount(); ++i)
+            {
+                double value = dialog.ui->tableWidget_2->item(i, 0)->text().toDouble();
+                double count = dialog.ui->tableWidget_2->item(i, 1)->text().toInt();
+
+                if (value != m_targetDistribution[i].value() || count != m_targetDistribution[i].count())
+                {
+                    theoUpdateRequired = true;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            theoUpdateRequired = true;
+        }
+
+        if (theoUpdateRequired)
+        {
+            std::vector<GroupedPoint> newPoints;
+            for (size_t i = 0; i < dialog.ui->tableWidget_2->rowCount(); ++i)
+            {
+                double value = dialog.ui->tableWidget_2->item(i, 0)->text().toDouble();
+                double count = dialog.ui->tableWidget_2->item(i, 1)->text().toInt();
+                newPoints.emplace_back(value, count);
+            }
+            m_targetDistribution = GroupedDiscreteDistribution(newPoints);
+        }
+
     }
 }
 
@@ -198,13 +254,22 @@ void MainWindow::generateAndPlotHistogram()
     SampleGenerator &gen = generator();
     GroupedSample gSamp = gen.generate(m_sampleSize).group();
 
-    DiscreteDistribution discreteDistribution = m_distribution.ungroup();
+    DiscreteDistribution discreteDistribution = m_targetDistribution.ungroup();
     ChiSquareCriterion chisq(discreteDistribution, gSamp);
 
+    std::vector<double> cats;
+    for (size_t i = 0; i < discreteDistribution.size(); ++i)
+        cats.push_back(discreteDistribution[i].value());
+    for (size_t i = 0; i < gSamp.size(); ++i)
+        cats.push_back(gSamp[i].value());
+
+    std::sort(cats.begin(), cats.end());
+    auto last = std::unique(cats.begin(), cats.end());
+    cats.erase(last, cats.end());
 
     QStringList categories;
-    for (size_t i = 0; i < discreteDistribution.size(); ++i)
-        categories << QString::number(discreteDistribution[i].value());
+    for (size_t i = 0; i < cats.size(); ++i)
+        categories << QString::number(cats[i]);
 
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
     axisX->append(categories);
@@ -216,10 +281,36 @@ void MainWindow::generateAndPlotHistogram()
     QBarSet *theoretical = new QBarSet("Theoretical");
     QBarSet *empirical = new QBarSet("Empirical");
 
-    for (size_t i = 0; i < discreteDistribution.size(); ++i)
-        theoretical->append(discreteDistribution[i].probability());
-    for (size_t i = 0; i < gSamp.size(); ++i)
-        empirical->append(gSamp[i].count() / (double)gSamp.count());
+    for (size_t i = 0, j = 0, k = 0; i < cats.size(); ++i)
+    {
+         double value = 0;
+         if(j < gSamp.size() && gSamp[j].value() == cats[i])
+         {
+             value = gSamp[j].count() / (double)gSamp.count();
+             ++j;
+         }
+         empirical->append(value);
+
+         if(k < discreteDistribution.size() && discreteDistribution[k].value() == cats[i])
+         {
+             value = discreteDistribution[k].probability();
+             ++k;
+         }
+         theoretical->append(value);
+    }
+
+//    for (size_t i = 0; i < discreteDistribution.size(); ++i)
+//        theoretical->append(discreteDistribution[i].probability());
+//    for (size_t i = 0, j = 0; i < gSamp.size() && j < discreteDistribution.size(); ++j)
+//    {
+//        double value = 0;
+//        if (gSamp[i].value() == discreteDistribution[j].value())
+//        {
+//            value = gSamp[i].count() / (double)gSamp.count();
+//            ++i;
+//        }
+//        empirical->append(value);
+//    }
 
 
     QBarSeries *series = new QBarSeries();
@@ -228,7 +319,7 @@ void MainWindow::generateAndPlotHistogram()
 
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("Comparing theoretical and empirical distributions, \nusing " + generatorDescription());
+    chart->setTitle("Comparing theoretical and empirical distributions, using " + generatorDescription());
     chart->setAnimationOptions(QChart::SeriesAnimations);
     chart->addAxis(axisX, Qt::AlignBottom);
     chart->addAxis(axisY, Qt::AlignLeft);
@@ -244,12 +335,13 @@ void MainWindow::generateAndPlotHistogram()
 
 void MainWindow::calculateAndPlotPLevels()
 {
-    std::vector<size_t> sampleSizes = {10, 100, 1000, 10000, 100000};
+    std::vector<size_t> sampleSizes = {10, 15, 30, 50, 100};
     std::vector<double> pValueShares;
     DiscreteDistribution discreteDistribution = m_distribution.ungroup();
 
     QStringList categories;
     QLineSeries *pValues = new QLineSeries();
+    QScatterSeries *pValuesPoints = new QScatterSeries();
     for (const size_t& size : sampleSizes)
     {
         categories << QString::number(size);
@@ -257,17 +349,27 @@ void MainWindow::calculateAndPlotPLevels()
         size_t pValuesOverLimit = 0;
         for (size_t i = 0; i < P_VALUE_COUNTS; ++i)
         {
-            GroupedSample sample = m_tableSampleGenerator.generate(size).group();
+            GroupedSample sample = generator().generate(size).group();
             ChiSquareCriterion chisq(discreteDistribution, sample);
 
             double pVal = chisq.pValue();
-            if (pVal > m_alpha)
+            if (pVal < m_alpha)
                 ++pValuesOverLimit;
         }
+
         double share = pValuesOverLimit / (double)P_VALUE_COUNTS;
         pValueShares.push_back(share);
+//        if (pValues->points().length() > 0)
+//        {
+//            QPointF p = pValues->at(pValues->points().length() - 1);
+//            pValues->append(QPointF(size, p.y()));
+//        }
         pValues->append(QPointF(size, share));
+        pValuesPoints->append(QPointF(size, share));
     }
+
+    pValuesPoints->setMarkerShape(QScatterSeries::MarkerShapeCircle);
+    pValuesPoints->setMarkerSize(5.0);
 
     QLogValueAxis *axisX = new QLogValueAxis();
     axisX->setLabelFormat("%g");
@@ -279,6 +381,7 @@ void MainWindow::calculateAndPlotPLevels()
 
     QChart *chart = new QChart();
     chart->addSeries(pValues);
+//    chart->addSeries(pValuesPoints);
     chart->setTitle("Relationship between sample size and true significance level, using " + generatorDescription() +
                     "\n and formal significance level " + QString::number(m_alpha));
     chart->setAnimationOptions(QChart::SeriesAnimations);
@@ -287,7 +390,7 @@ void MainWindow::calculateAndPlotPLevels()
     pValues->attachAxis(axisX);
     pValues->attachAxis(axisY);
 
-    chart->legend()->setVisible(true);
+    chart->legend()->setVisible(false);
     chart->legend()->setAlignment(Qt::AlignBottom);
 
     ui->graphicsView->setChart(chart);
@@ -343,6 +446,57 @@ void MainWindow::performAndPlotPerformanceTest()
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisX);
     series->attachAxis(axisY);
+
+    chart->legend()->setVisible(true);
+    chart->legend()->setAlignment(Qt::AlignBottom);
+
+    ui->graphicsView->setChart(chart);
+}
+
+void MainWindow::plotPValues()
+{
+    DiscreteDistribution discreteDistribution = m_targetDistribution.ungroup();
+    const size_t STEPS = 100;
+    const double step = 1.0 / STEPS;
+
+    size_t pValueCounts[STEPS + 1] = {};
+    for (size_t i = 0; i < P_VALUE_COUNTS; ++i)
+    {
+        GroupedSample sample = generator().generate(m_sampleSize).group();
+        ChiSquareCriterion chisq(discreteDistribution, sample);
+        double pValue = chisq.pValue();
+        pValueCounts[(size_t)(pValue * (STEPS))] += 1;
+    }
+
+    QLineSeries *targetSeries = new QLineSeries();
+    targetSeries->setName("Target CDF");
+    for (size_t i = 0; i < STEPS + 1; ++i)
+    {
+        targetSeries->append(QPointF(i / double(STEPS + 1), i * step));
+    }
+
+    QLineSeries *pValueSeries = new QLineSeries();
+    pValueSeries->setName("P-value CDF");
+    size_t countSoFar = 0;
+    for (size_t i = 0; i < STEPS + 1; ++i)
+    {
+        double x = i / double(STEPS + 1);
+        if (pValueSeries->points().length() > 0)
+        {
+            QPointF p = pValueSeries->at(pValueSeries->points().length() - 1);
+//            pValueSeries->append(QPointF(x, p.y()));
+        }
+
+        pValueSeries->append(QPointF(x, countSoFar / (double)P_VALUE_COUNTS));
+        countSoFar += pValueCounts[i];
+    }
+
+    QChart *chart = new QChart();
+    chart->addSeries(pValueSeries);
+    chart->addSeries(targetSeries);
+    chart->setTitle("Empirical CDF of p-values");
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+    chart->createDefaultAxes();
 
     chart->legend()->setVisible(true);
     chart->legend()->setAlignment(Qt::AlignBottom);
